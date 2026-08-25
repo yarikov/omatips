@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "yarikov.omatips",
+  "name": "OmaTips",
+  "version": "1.0.0",
+  "author": "Dmitry Yarikov",
+  "license": "MIT",
+  "description": "Learn 234 Omarchy hotkey lessons with Anki-style spaced repetition",
+  "kinds": [
+    "service",
+    "bar-widget"
+  ],
+  "keepLoaded": true,
+  "entryPoints": {
+    "service": "Service.qml",
+    "barWidget": "BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "OmaTips",
+    "description": "Due Omarchy tips with Anki-style spaced repetition",
+    "category": "Learning",
+    "allowMultiple": false,
+    "defaultSection": "center"
+  }
+}

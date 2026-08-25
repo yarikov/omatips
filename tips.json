@@ -1,0 +1,1640 @@
+[
+  {
+    "id": "show-omarchy-keybindings",
+    "category": "Keybinding guides",
+    "title": "Show Omarchy keybindings",
+    "description": "Press this shortcut to open the searchable Omarchy keybinding guide.",
+    "shortcut": "SUPER + K"
+  },
+  {
+    "id": "show-tmux-keybindings",
+    "category": "Keybinding guides",
+    "title": "Show Tmux keybindings",
+    "description": "Press this shortcut to open the searchable Tmux keybinding guide.",
+    "shortcut": "SUPER + ALT + K"
+  },
+  {
+    "id": "show-herdr-keybindings",
+    "category": "Keybinding guides",
+    "title": "Show Herdr keybindings",
+    "description": "Press this shortcut to open the searchable Herdr keybinding guide.",
+    "shortcut": "SUPER + CTRL + K"
+  },
+  {
+    "id": "navigating-omarchy-menu-apps-and-everything-else-super-space",
+    "category": "Navigating",
+    "title": "Omarchy menu (apps and everything else)",
+    "description": "Need to open the main Omarchy menu? This shortcut gets you there quickly.",
+    "shortcut": "SUPER + SPACE"
+  },
+  {
+    "id": "navigating-apps-menu-super-alt-space",
+    "category": "Navigating",
+    "title": "Apps menu",
+    "description": "Keep this shortcut handy when you want to open the apps menu.",
+    "shortcut": "SUPER + ALT + SPACE"
+  },
+  {
+    "id": "navigating-system-menu-suspend-restart-etc-super-escape",
+    "category": "Navigating",
+    "title": "System menu (suspend, restart, etc)",
+    "description": "This shortcut is the quickest keyboard route to open the system menu.",
+    "shortcut": "SUPER + ESCAPE"
+  },
+  {
+    "id": "navigating-lock-computer-super-ctrl-l",
+    "category": "Navigating",
+    "title": "Lock computer",
+    "description": "Stay on the keyboard: use this shortcut to lock your computer.",
+    "shortcut": "SUPER + CTRL + L"
+  },
+  {
+    "id": "navigating-close-window-super-w",
+    "category": "Navigating",
+    "title": "Close window",
+    "description": "One key combination is all it takes to close the active window.",
+    "shortcut": "SUPER + W"
+  },
+  {
+    "id": "navigating-close-window-super-q",
+    "category": "Navigating",
+    "title": "Close window",
+    "description": "Reach for this shortcut whenever you need to close the active window.",
+    "shortcut": "SUPER + Q"
+  },
+  {
+    "id": "navigating-close-all-windows-ctrl-alt-del",
+    "category": "Navigating",
+    "title": "Close all windows",
+    "description": "Skip the menus and use this shortcut to close all windows.",
+    "shortcut": "CTRL + ALT + DEL"
+  },
+  {
+    "id": "navigating-toggle-window-between-tiling-floating-super-t",
+    "category": "Navigating",
+    "title": "Toggle window between tiling/floating",
+    "description": "This key combination is a fast way to switch the active window between tiled and floating modes.",
+    "shortcut": "SUPER + T"
+  },
+  {
+    "id": "navigating-toggle-window-position-horizontal-vertical-super-j",
+    "category": "Navigating",
+    "title": "Toggle window position (horizontal/vertical)",
+    "description": "Press this shortcut whenever you need to change the active split between horizontal and vertical.",
+    "shortcut": "SUPER + J"
+  },
+  {
+    "id": "navigating-toggle-popping-window-into-sticky-n-floating-super-o",
+    "category": "Navigating",
+    "title": "Toggle popping window into sticky’n’floating",
+    "description": "Press this shortcut to pop the active window into sticky floating mode.",
+    "shortcut": "SUPER + O"
+  },
+  {
+    "id": "navigating-toggle-between-dwindle-and-scrolling-layout-super-l",
+    "category": "Navigating",
+    "title": "Toggle between dwindle and scrolling layout",
+    "description": "Use this key combination to toggle between dwindle and scrolling layout.",
+    "shortcut": "SUPER + L"
+  },
+  {
+    "id": "navigating-toggle-pseudo-window-style-natural-v-stretch-super-p",
+    "category": "Navigating",
+    "title": "Toggle pseudo window style (natural v stretch)",
+    "description": "This shortcut lets you toggle pseudotiling for the active window without breaking your flow.",
+    "shortcut": "SUPER + P"
+  },
+  {
+    "id": "navigating-go-full-screen-super-f",
+    "category": "Navigating",
+    "title": "Go full screen",
+    "description": "Need to go full screen? This shortcut gets you there quickly.",
+    "shortcut": "SUPER + F"
+  },
+  {
+    "id": "navigating-go-full-width-super-alt-f",
+    "category": "Navigating",
+    "title": "Go full width",
+    "description": "Keep this shortcut handy when you want to go full width.",
+    "shortcut": "SUPER + ALT + F"
+  },
+  {
+    "id": "navigating-go-full-screen-inside-window-super-ctrl-f",
+    "category": "Navigating",
+    "title": "Go full screen inside window",
+    "description": "This shortcut is the quickest keyboard route to go full screen inside window.",
+    "shortcut": "SUPER + CTRL + F"
+  },
+  {
+    "id": "navigating-jump-to-specific-workspace-super-1-2-3-4",
+    "category": "Navigating",
+    "title": "Jump to specific workspace",
+    "description": "Stay on the keyboard: use this shortcut to jump to a specific workspace.",
+    "shortcut": "SUPER + 1/2/3/4"
+  },
+  {
+    "id": "navigating-jump-to-next-workspace-super-tab",
+    "category": "Navigating",
+    "title": "Jump to next workspace",
+    "description": "One key combination is all it takes to jump to the next workspace.",
+    "shortcut": "SUPER + TAB"
+  },
+  {
+    "id": "navigating-jump-to-previous-workspace-super-shift-tab",
+    "category": "Navigating",
+    "title": "Jump to previous workspace",
+    "description": "Reach for this shortcut whenever you need to jump to the previous workspace.",
+    "shortcut": "SUPER + SHIFT + TAB"
+  },
+  {
+    "id": "navigating-jump-to-former-workspace-super-ctrl-tab",
+    "category": "Navigating",
+    "title": "Jump to former workspace",
+    "description": "Skip the menus and use this shortcut to return to the workspace you used last.",
+    "shortcut": "SUPER + CTRL + TAB"
+  },
+  {
+    "id": "navigating-move-window-to-workspace-super-shift-1-2-3-4",
+    "category": "Navigating",
+    "title": "Move window to workspace",
+    "description": "This key combination is a fast way to move the active window to another workspace.",
+    "shortcut": "SUPER + SHIFT + 1/2/3/4"
+  },
+  {
+    "id": "navigating-move-window-to-workspace-without-following-super-shift-alt-1-2-3-4",
+    "category": "Navigating",
+    "title": "Move window to workspace without following",
+    "description": "Press this shortcut whenever you need to send the active window to another workspace without following it.",
+    "shortcut": "SUPER + SHIFT + ALT + 1/2/3/4"
+  },
+  {
+    "id": "navigating-toggle-scratchpad-super-s",
+    "category": "Navigating",
+    "title": "Toggle scratchpad",
+    "description": "Press this shortcut to show or hide the scratchpad.",
+    "shortcut": "SUPER + S"
+  },
+  {
+    "id": "navigating-toggle-scratchpad-super-grave",
+    "category": "Navigating",
+    "title": "Toggle scratchpad",
+    "description": "Use this key combination to show or hide the scratchpad.",
+    "shortcut": "SUPER + GRAVE"
+  },
+  {
+    "id": "navigating-move-window-to-scratchpad-super-alt-s",
+    "category": "Navigating",
+    "title": "Move window to scratchpad",
+    "description": "This shortcut lets you send the active window to the scratchpad without breaking your flow.",
+    "shortcut": "SUPER + ALT + S"
+  },
+  {
+    "id": "navigating-move-window-to-scratchpad-super-shift-grave",
+    "category": "Navigating",
+    "title": "Move window to scratchpad",
+    "description": "Need to send the active window to the scratchpad? This shortcut gets you there quickly.",
+    "shortcut": "SUPER + SHIFT + GRAVE"
+  },
+  {
+    "id": "navigating-move-workspaces-to-directional-monitor-super-shift-alt-arrows",
+    "category": "Navigating",
+    "title": "Move workspaces to directional monitor",
+    "description": "Keep this shortcut handy when you want to move the current workspace to another monitor.",
+    "shortcut": "SUPER + SHIFT + ALT + ARROWS"
+  },
+  {
+    "id": "navigating-move-focus-to-window-in-direction-of-arrow-super-arrow",
+    "category": "Navigating",
+    "title": "Move focus to window in direction of arrow",
+    "description": "This shortcut is the quickest keyboard route to focus the window in the chosen direction.",
+    "shortcut": "SUPER + ARROW"
+  },
+  {
+    "id": "navigating-swap-window-with-another-in-direction-of-arrow-super-shift-arrow",
+    "category": "Navigating",
+    "title": "Swap window with another in direction of arrow",
+    "description": "Stay on the keyboard: use this shortcut to swap the active window with its neighbor.",
+    "shortcut": "SUPER + SHIFT + ARROW"
+  },
+  {
+    "id": "navigating-expand-window-left-super-minus",
+    "category": "Navigating",
+    "title": "Expand window left",
+    "description": "One key combination is all it takes to expand the active window to the left.",
+    "shortcut": "SUPER + MINUS"
+  },
+  {
+    "id": "navigating-shrink-window-left-super-equal",
+    "category": "Navigating",
+    "title": "Shrink window left",
+    "description": "Reach for this shortcut whenever you need to shrink the active window from the left.",
+    "shortcut": "SUPER + EQUAL"
+  },
+  {
+    "id": "navigating-shrink-window-up-super-shift-minus",
+    "category": "Navigating",
+    "title": "Shrink window up",
+    "description": "Skip the menus and use this shortcut to shrink the active window upward.",
+    "shortcut": "SUPER + SHIFT + MINUS"
+  },
+  {
+    "id": "navigating-expand-window-down-super-shift-equal",
+    "category": "Navigating",
+    "title": "Expand window down",
+    "description": "This key combination is a fast way to expand the active window downward.",
+    "shortcut": "SUPER + SHIFT + EQUAL"
+  },
+  {
+    "id": "navigating-same-resizing-in-smaller-steps-super-alt-minus",
+    "category": "Navigating",
+    "title": "Same resizing in smaller steps",
+    "description": "Press this shortcut whenever you need to resize the window in smaller steps.",
+    "shortcut": "SUPER + ALT + MINUS"
+  },
+  {
+    "id": "navigating-same-resizing-in-smaller-steps-super-alt-equal",
+    "category": "Navigating",
+    "title": "Same resizing in smaller steps",
+    "description": "Press this shortcut to resize the window in smaller steps.",
+    "shortcut": "SUPER + ALT + EQUAL"
+  },
+  {
+    "id": "navigating-same-resizing-in-bigger-steps-super-ctrl-minus",
+    "category": "Navigating",
+    "title": "Same resizing in bigger steps",
+    "description": "Use this key combination to resize the window in bigger steps.",
+    "shortcut": "SUPER + CTRL + MINUS"
+  },
+  {
+    "id": "navigating-same-resizing-in-bigger-steps-super-ctrl-equal",
+    "category": "Navigating",
+    "title": "Same resizing in bigger steps",
+    "description": "This shortcut lets you resize the window in bigger steps without breaking your flow.",
+    "shortcut": "SUPER + CTRL + EQUAL"
+  },
+  {
+    "id": "navigating-save-window-width-super-alt-home",
+    "category": "Navigating",
+    "title": "Save window width",
+    "description": "Need to save the active window's width? This shortcut gets you there quickly.",
+    "shortcut": "SUPER + ALT + HOME"
+  },
+  {
+    "id": "navigating-restore-saved-window-width-super-home",
+    "category": "Navigating",
+    "title": "Restore saved window width",
+    "description": "Keep this shortcut handy when you want to restore the active window's saved width.",
+    "shortcut": "SUPER + HOME"
+  },
+  {
+    "id": "navigating-drag-window-around-super-left-mouse",
+    "category": "Navigating",
+    "title": "Drag window around",
+    "description": "This shortcut is the quickest keyboard route to drag the active window from anywhere inside it.",
+    "shortcut": "SUPER + LEFT MOUSE"
+  },
+  {
+    "id": "navigating-resize-window-super-right-mouse",
+    "category": "Navigating",
+    "title": "Resize window",
+    "description": "Stay on the keyboard: use this shortcut to resize the active window with the mouse.",
+    "shortcut": "SUPER + RIGHT MOUSE"
+  },
+  {
+    "id": "navigating-scroll-through-workspaces-super-scroll-wheel",
+    "category": "Navigating",
+    "title": "Scroll through workspaces",
+    "description": "One key combination is all it takes to scroll through workspaces.",
+    "shortcut": "SUPER + SCROLL WHEEL"
+  },
+  {
+    "id": "navigating-toggle-window-grouping-super-g",
+    "category": "Navigating",
+    "title": "Toggle window grouping",
+    "description": "Reach for this shortcut whenever you need to toggle window grouping.",
+    "shortcut": "SUPER + G"
+  },
+  {
+    "id": "navigating-move-window-out-of-grouping-super-alt-g",
+    "category": "Navigating",
+    "title": "Move window out of grouping",
+    "description": "Skip the menus and use this shortcut to move window out of grouping.",
+    "shortcut": "SUPER + ALT + G"
+  },
+  {
+    "id": "navigating-cycle-between-windows-in-grouping-super-alt-tab",
+    "category": "Navigating",
+    "title": "Cycle between windows in grouping",
+    "description": "This key combination is a fast way to cycle between windows in grouping.",
+    "shortcut": "SUPER + ALT + TAB"
+  },
+  {
+    "id": "navigating-cycle-backward-between-windows-in-grouping-super-alt-shift-tab",
+    "category": "Navigating",
+    "title": "Cycle backward between windows in grouping",
+    "description": "Press this shortcut whenever you need to cycle backward between windows in grouping.",
+    "shortcut": "SUPER + ALT + SHIFT + TAB"
+  },
+  {
+    "id": "navigating-jump-to-specific-window-in-grouping-super-alt-1-2-3-4-5",
+    "category": "Navigating",
+    "title": "Jump to specific window in grouping",
+    "description": "Press this shortcut to jump to specific window in grouping.",
+    "shortcut": "SUPER + ALT + 1/2/3/4/5"
+  },
+  {
+    "id": "navigating-move-window-into-grouping-in-direction-of-arrow-super-alt-arrow",
+    "category": "Navigating",
+    "title": "Move window into grouping in direction of arrow",
+    "description": "Use this key combination to move window into grouping in direction of arrow.",
+    "shortcut": "SUPER + ALT + ARROW"
+  },
+  {
+    "id": "navigating-move-between-windows-inside-a-tiling-group-super-ctrl-left-right",
+    "category": "Navigating",
+    "title": "Move between windows inside a tiling group",
+    "description": "This shortcut lets you move between windows inside a tiling group without breaking your flow.",
+    "shortcut": "SUPER + CTRL + LEFT/RIGHT"
+  },
+  {
+    "id": "navigating-zoom-in-on-screen-repeat-for-more-zoom-super-ctrl-z",
+    "category": "Navigating",
+    "title": "Zoom in on screen (repeat for more zoom)",
+    "description": "Need to zoom in on screen (repeat for more zoom)? This shortcut gets you there quickly.",
+    "shortcut": "SUPER + CTRL + Z"
+  },
+  {
+    "id": "navigating-zoom-fully-out-from-screen-super-ctrl-alt-z",
+    "category": "Navigating",
+    "title": "Zoom fully out from screen",
+    "description": "Keep this shortcut handy when you want to zoom fully out from screen.",
+    "shortcut": "SUPER + CTRL + ALT + Z"
+  },
+  {
+    "id": "navigating-step-forward-through-monitor-scaling-options-super",
+    "category": "Navigating",
+    "title": "Step forward through monitor scaling options",
+    "description": "This shortcut is the quickest keyboard route to step forward through monitor scaling options.",
+    "shortcut": "SUPER + /"
+  },
+  {
+    "id": "navigating-step-backward-through-monitor-scaling-options-super-alt",
+    "category": "Navigating",
+    "title": "Step backward through monitor scaling options",
+    "description": "Stay on the keyboard: use this shortcut to step backward through monitor scaling options.",
+    "shortcut": "SUPER + ALT + /"
+  },
+  {
+    "id": "navigating-cycle-forward-through-windows-on-the-active-workspace-alt-tab",
+    "category": "Navigating",
+    "title": "Cycle forward through windows on the active workspace",
+    "description": "One key combination is all it takes to cycle forward through windows on the active workspace.",
+    "shortcut": "ALT + TAB"
+  },
+  {
+    "id": "navigating-cycle-backward-through-windows-on-the-active-workspace-alt-shift-tab",
+    "category": "Navigating",
+    "title": "Cycle backward through windows on the active workspace",
+    "description": "Reach for this shortcut whenever you need to cycle backward through windows on the active workspace.",
+    "shortcut": "ALT + SHIFT + TAB"
+  },
+  {
+    "id": "navigating-cycle-focus-forward-through-monitors-ctrl-alt-tab",
+    "category": "Navigating",
+    "title": "Cycle focus forward through monitors",
+    "description": "Skip the menus and use this shortcut to cycle focus forward through monitors.",
+    "shortcut": "CTRL + ALT + TAB"
+  },
+  {
+    "id": "navigating-cycle-focus-backwards-through-monitors-ctrl-alt-shift-tab",
+    "category": "Navigating",
+    "title": "Cycle focus backwards through monitors",
+    "description": "This key combination is a fast way to cycle focus backwards through monitors.",
+    "shortcut": "CTRL + ALT + SHIFT + TAB"
+  },
+  {
+    "id": "system-controls-audio-panel-super-ctrl-a",
+    "category": "System controls",
+    "title": "Audio panel",
+    "description": "Press this shortcut whenever you need to open the audio panel.",
+    "shortcut": "SUPER + CTRL + A"
+  },
+  {
+    "id": "system-controls-bluetooth-panel-super-ctrl-b",
+    "category": "System controls",
+    "title": "Bluetooth panel",
+    "description": "Press this shortcut to open the Bluetooth panel.",
+    "shortcut": "SUPER + CTRL + B"
+  },
+  {
+    "id": "system-controls-wifi-network-panel-super-ctrl-w",
+    "category": "System controls",
+    "title": "Wifi/network panel",
+    "description": "Use this key combination to open the Wi-Fi and network panel.",
+    "shortcut": "SUPER + CTRL + W"
+  },
+  {
+    "id": "system-controls-display-panel-super-ctrl-d",
+    "category": "System controls",
+    "title": "Display panel",
+    "description": "This shortcut lets you open the display panel without breaking your flow.",
+    "shortcut": "SUPER + CTRL + D"
+  },
+  {
+    "id": "system-controls-power-panel-super-ctrl-p",
+    "category": "System controls",
+    "title": "Power panel",
+    "description": "Need to open the power panel? This shortcut gets you there quickly.",
+    "shortcut": "SUPER + CTRL + P"
+  },
+  {
+    "id": "system-controls-calendar-panel-super-ctrl-alt-d",
+    "category": "System controls",
+    "title": "Calendar panel",
+    "description": "Keep this shortcut handy when you want to open the calendar panel.",
+    "shortcut": "SUPER + CTRL + ALT + D"
+  },
+  {
+    "id": "system-controls-toggle-bar-panel-by-position-super-ctrl-1-9",
+    "category": "System controls",
+    "title": "Toggle bar panel by position",
+    "description": "This shortcut is the quickest keyboard route to toggle bar panel by position.",
+    "shortcut": "SUPER + CTRL + 1-9"
+  },
+  {
+    "id": "system-controls-share-menu-via-localsend-super-ctrl-s",
+    "category": "System controls",
+    "title": "Share menu (via LocalSend)",
+    "description": "Stay on the keyboard: use this shortcut to open the LocalSend share menu.",
+    "shortcut": "SUPER + CTRL + S"
+  },
+  {
+    "id": "system-controls-activity-btop-super-ctrl-t",
+    "category": "System controls",
+    "title": "Activity (btop)",
+    "description": "One key combination is all it takes to open the btop activity monitor.",
+    "shortcut": "SUPER + CTRL + T"
+  },
+  {
+    "id": "system-controls-capture-controls-screenshot-recording-picker-super-ctrl-c",
+    "category": "System controls",
+    "title": "Capture controls (screenshot/-recording/picker)",
+    "description": "Reach for this shortcut whenever you need to open the capture controls.",
+    "shortcut": "SUPER + CTRL + C"
+  },
+  {
+    "id": "system-controls-toggle-menu-super-ctrl-o",
+    "category": "System controls",
+    "title": "Toggle menu",
+    "description": "Skip the menus and use this shortcut to toggle menu.",
+    "shortcut": "SUPER + CTRL + O"
+  },
+  {
+    "id": "system-controls-hardware-menu-super-ctrl-h",
+    "category": "System controls",
+    "title": "Hardware menu",
+    "description": "This key combination is a fast way to open the hardware menu.",
+    "shortcut": "SUPER + CTRL + H"
+  },
+  {
+    "id": "system-controls-calculator-super-ctrl-q",
+    "category": "System controls",
+    "title": "Calculator",
+    "description": "Press this shortcut whenever you need to open the calculator.",
+    "shortcut": "SUPER + CTRL + Q"
+  },
+  {
+    "id": "system-controls-emoji-picker-super-ctrl-e",
+    "category": "System controls",
+    "title": "Emoji picker",
+    "description": "Press this shortcut to open the emoji picker.",
+    "shortcut": "SUPER + CTRL + E"
+  },
+  {
+    "id": "system-controls-transcode-media-super-ctrl",
+    "category": "System controls",
+    "title": "Transcode media",
+    "description": "Use this key combination to transcode media.",
+    "shortcut": "SUPER + CTRL + ."
+  },
+  {
+    "id": "system-controls-pick-an-ai-agent-super-shift-ctrl-a",
+    "category": "System controls",
+    "title": "Pick an AI agent",
+    "description": "This shortcut lets you pick an AI agent without breaking your flow.",
+    "shortcut": "SUPER + SHIFT + CTRL + A"
+  },
+  {
+    "id": "adjustments-maximum-screen-brightness-shift-brightness-up",
+    "category": "Adjustments",
+    "title": "Maximum screen brightness",
+    "description": "Need to set the screen to maximum brightness? This shortcut gets you there quickly.",
+    "shortcut": "SHIFT + BRIGHTNESS UP"
+  },
+  {
+    "id": "adjustments-minimum-screen-brightness-shift-brightness-down",
+    "category": "Adjustments",
+    "title": "Minimum screen brightness",
+    "description": "Keep this shortcut handy when you want to set the screen to minimum brightness.",
+    "shortcut": "SHIFT + BRIGHTNESS DOWN"
+  },
+  {
+    "id": "adjustments-precise-1-brightness-changes-alt-brightness-up-down",
+    "category": "Adjustments",
+    "title": "Precise 1% brightness changes",
+    "description": "This shortcut is the quickest keyboard route to adjust brightness in precise one-percent steps.",
+    "shortcut": "ALT + BRIGHTNESS UP/DOWN"
+  },
+  {
+    "id": "adjustments-precise-1-volume-changes-alt-volume-up-down",
+    "category": "Adjustments",
+    "title": "Precise 1% volume changes",
+    "description": "Stay on the keyboard: use this shortcut to adjust volume in precise one-percent steps.",
+    "shortcut": "ALT + VOLUME UP/DOWN"
+  },
+  {
+    "id": "adjustments-keyboard-backlight-brighter-dimmer-keyboard-brightness-up-down",
+    "category": "Adjustments",
+    "title": "Keyboard backlight brighter/dimmer",
+    "description": "One key combination is all it takes to adjust the keyboard backlight.",
+    "shortcut": "KEYBOARD BRIGHTNESS UP/DOWN"
+  },
+  {
+    "id": "adjustments-cycle-the-keyboard-backlight-levels-keyboard-backlight",
+    "category": "Adjustments",
+    "title": "Cycle the keyboard backlight levels",
+    "description": "Reach for this shortcut whenever you need to cycle the keyboard backlight levels.",
+    "shortcut": "KEYBOARD BACKLIGHT"
+  },
+  {
+    "id": "adjustments-next-track-alt-play",
+    "category": "Adjustments",
+    "title": "Next track",
+    "description": "Skip the menus and use this shortcut to skip to the next track.",
+    "shortcut": "ALT + PLAY"
+  },
+  {
+    "id": "adjustments-previous-track-alt-shift-play",
+    "category": "Adjustments",
+    "title": "Previous track",
+    "description": "This key combination is a fast way to return to the previous track.",
+    "shortcut": "ALT + SHIFT + PLAY"
+  },
+  {
+    "id": "launching-apps-terminal-super-return",
+    "category": "Launching apps",
+    "title": "Terminal",
+    "description": "Press this shortcut whenever you need to launch the terminal.",
+    "shortcut": "SUPER + RETURN"
+  },
+  {
+    "id": "launching-apps-tmux-terminal-super-alt-return",
+    "category": "Launching apps",
+    "title": "Tmux terminal",
+    "description": "Press this shortcut to launch a Tmux terminal.",
+    "shortcut": "SUPER + ALT + RETURN"
+  },
+  {
+    "id": "launching-apps-herdr-agent-manager-super-ctrl-return",
+    "category": "Launching apps",
+    "title": "Herdr (agent manager)",
+    "description": "Use this key combination to launch the Herdr agent manager.",
+    "shortcut": "SUPER + CTRL + RETURN"
+  },
+  {
+    "id": "launching-apps-browser-super-shift-return",
+    "category": "Launching apps",
+    "title": "Browser",
+    "description": "This shortcut lets you launch the browser without breaking your flow.",
+    "shortcut": "SUPER + SHIFT + RETURN"
+  },
+  {
+    "id": "launching-apps-browser-private-incognito-super-shift-alt-b",
+    "category": "Launching apps",
+    "title": "Browser (private/incognito)",
+    "description": "Need to open a private browser window? This shortcut gets you there quickly.",
+    "shortcut": "SUPER + SHIFT + ALT + B"
+  },
+  {
+    "id": "launching-apps-file-manager-super-shift-f",
+    "category": "Launching apps",
+    "title": "File manager",
+    "description": "Keep this shortcut handy when you want to launch the file manager.",
+    "shortcut": "SUPER + SHIFT + F"
+  },
+  {
+    "id": "launching-apps-file-manager-in-cwd-of-terminal-super-shift-alt-f",
+    "category": "Launching apps",
+    "title": "File manager in cwd of terminal",
+    "description": "This shortcut is the quickest keyboard route to open the terminal's current folder in the file manager.",
+    "shortcut": "SUPER + SHIFT + ALT + F"
+  },
+  {
+    "id": "launching-apps-music-spotify-super-shift-m",
+    "category": "Launching apps",
+    "title": "Music (Spotify)",
+    "description": "Stay on the keyboard: use this shortcut to launch Spotify.",
+    "shortcut": "SUPER + SHIFT + M"
+  },
+  {
+    "id": "launching-apps-music-cliamp-super-shift-alt-m",
+    "category": "Launching apps",
+    "title": "Music (cliamp)",
+    "description": "One key combination is all it takes to launch cliamp.",
+    "shortcut": "SUPER + SHIFT + ALT + M"
+  },
+  {
+    "id": "launching-apps-password-manager-1password-super-shift",
+    "category": "Launching apps",
+    "title": "Password manager (1password)",
+    "description": "Reach for this shortcut whenever you need to open 1Password.",
+    "shortcut": "SUPER + SHIFT + /"
+  },
+  {
+    "id": "launching-apps-editor-neovim-super-shift-n",
+    "category": "Launching apps",
+    "title": "Editor (Neovim)",
+    "description": "Skip the menus and use this shortcut to launch Neovim.",
+    "shortcut": "SUPER + SHIFT + N"
+  },
+  {
+    "id": "launching-apps-calendar-hey-super-shift-c",
+    "category": "Launching apps",
+    "title": "Calendar (HEY)",
+    "description": "This key combination is a fast way to open HEY Calendar.",
+    "shortcut": "SUPER + SHIFT + C"
+  },
+  {
+    "id": "launching-apps-email-hey-super-shift-e",
+    "category": "Launching apps",
+    "title": "Email (HEY)",
+    "description": "Press this shortcut whenever you need to open HEY Email.",
+    "shortcut": "SUPER + SHIFT + E"
+  },
+  {
+    "id": "launching-apps-new-email-hey-super-shift-alt-e",
+    "category": "Launching apps",
+    "title": "New email (HEY)",
+    "description": "Press this shortcut to compose a new message in HEY.",
+    "shortcut": "SUPER + SHIFT + ALT + E"
+  },
+  {
+    "id": "launching-apps-ai-chatgpt-super-shift-a",
+    "category": "Launching apps",
+    "title": "AI (ChatGPT)",
+    "description": "Use this key combination to open ChatGPT.",
+    "shortcut": "SUPER + SHIFT + A"
+  },
+  {
+    "id": "launching-apps-ai-grok-super-shift-alt-a",
+    "category": "Launching apps",
+    "title": "AI (Grok)",
+    "description": "This shortcut lets you open Grok without breaking your flow.",
+    "shortcut": "SUPER + SHIFT + ALT + A"
+  },
+  {
+    "id": "launching-apps-messenger-signal-super-shift-g",
+    "category": "Launching apps",
+    "title": "Messenger (Signal)",
+    "description": "Need to open Signal? This shortcut gets you there quickly.",
+    "shortcut": "SUPER + SHIFT + G"
+  },
+  {
+    "id": "launching-apps-google-photos-super-shift-p",
+    "category": "Launching apps",
+    "title": "Google Photos",
+    "description": "Keep this shortcut handy when you want to open Google Photos.",
+    "shortcut": "SUPER + SHIFT + P"
+  },
+  {
+    "id": "launching-apps-google-maps-super-shift-s",
+    "category": "Launching apps",
+    "title": "Google Maps",
+    "description": "This shortcut is the quickest keyboard route to open Google Maps.",
+    "shortcut": "SUPER + SHIFT + S"
+  },
+  {
+    "id": "launching-apps-messenger-whatsapp-super-shift-alt-g",
+    "category": "Launching apps",
+    "title": "Messenger (WhatsApp)",
+    "description": "Stay on the keyboard: use this shortcut to open WhatsApp.",
+    "shortcut": "SUPER + SHIFT + ALT + G"
+  },
+  {
+    "id": "launching-apps-messenger-google-super-shift-ctrl-g",
+    "category": "Launching apps",
+    "title": "Messenger (Google)",
+    "description": "One key combination is all it takes to open Google Messages.",
+    "shortcut": "SUPER + SHIFT + CTRL + G"
+  },
+  {
+    "id": "launching-apps-docker-lazydocker-super-shift-d",
+    "category": "Launching apps",
+    "title": "Docker (LazyDocker)",
+    "description": "Reach for this shortcut whenever you need to launch LazyDocker.",
+    "shortcut": "SUPER + SHIFT + D"
+  },
+  {
+    "id": "launching-apps-obsidian-super-shift-o",
+    "category": "Launching apps",
+    "title": "Obsidian",
+    "description": "Skip the menus and use this shortcut to launch Obsidian.",
+    "shortcut": "SUPER + SHIFT + O"
+  },
+  {
+    "id": "launching-apps-writing-omawrite-super-shift-w",
+    "category": "Launching apps",
+    "title": "Writing (Omawrite)",
+    "description": "This key combination is a fast way to launch Omawrite.",
+    "shortcut": "SUPER + SHIFT + W"
+  },
+  {
+    "id": "launching-apps-x-super-shift-x",
+    "category": "Launching apps",
+    "title": "X",
+    "description": "Press this shortcut whenever you need to open X.",
+    "shortcut": "SUPER + SHIFT + X"
+  },
+  {
+    "id": "launching-apps-x-compose-super-shift-alt-x",
+    "category": "Launching apps",
+    "title": "X Compose",
+    "description": "Press this shortcut to start a new post on X.",
+    "shortcut": "SUPER + SHIFT + ALT + X"
+  },
+  {
+    "id": "launching-apps-youtube-super-shift-y",
+    "category": "Launching apps",
+    "title": "YouTube",
+    "description": "Use this key combination to open YouTube.",
+    "shortcut": "SUPER + SHIFT + Y"
+  },
+  {
+    "id": "universal-clipboard-copy-super-c",
+    "category": "Universal clipboard",
+    "title": "Copy",
+    "description": "This shortcut lets you copy without breaking your flow.",
+    "shortcut": "SUPER + C"
+  },
+  {
+    "id": "universal-clipboard-cut-not-in-terminal-super-x",
+    "category": "Universal clipboard",
+    "title": "Cut (not in terminal)",
+    "description": "Need to cut the selected content outside the terminal? This shortcut gets you there quickly.",
+    "shortcut": "SUPER + X"
+  },
+  {
+    "id": "universal-clipboard-paste-super-v",
+    "category": "Universal clipboard",
+    "title": "Paste",
+    "description": "Keep this shortcut handy when you want to paste the current clipboard contents.",
+    "shortcut": "SUPER + V"
+  },
+  {
+    "id": "universal-clipboard-clipboard-manager-super-ctrl-v",
+    "category": "Universal clipboard",
+    "title": "Clipboard manager",
+    "description": "This shortcut is the quickest keyboard route to open the clipboard manager.",
+    "shortcut": "SUPER + CTRL + V"
+  },
+  {
+    "id": "capture-capture-menu-for-keyboards-w-o-printscr-button-super-ctrl-c",
+    "category": "Capture",
+    "title": "Capture menu (for keyboards w/o PrintScr button)",
+    "description": "Stay on the keyboard: use this shortcut to open the capture menu without a Print Screen key.",
+    "shortcut": "SUPER + CTRL + C"
+  },
+  {
+    "id": "capture-screenshot-print-screen",
+    "category": "Capture",
+    "title": "Screenshot",
+    "description": "One key combination is all it takes to take a screenshot.",
+    "shortcut": "PRINT SCREEN"
+  },
+  {
+    "id": "capture-screenrecord-alt-print-screen",
+    "category": "Capture",
+    "title": "Screenrecord",
+    "description": "Reach for this shortcut whenever you need to start or stop a screen recording.",
+    "shortcut": "ALT + PRINT SCREEN"
+  },
+  {
+    "id": "capture-color-picker-super-print-screen",
+    "category": "Capture",
+    "title": "Color picker",
+    "description": "Skip the menus and use this shortcut to pick a color from the screen.",
+    "shortcut": "SUPER + PRINT SCREEN"
+  },
+  {
+    "id": "capture-text-extraction-to-clipboard-super-ctrl-print-screen",
+    "category": "Capture",
+    "title": "Text extraction to clipboard",
+    "description": "This key combination is a fast way to extract text from the screen to the clipboard.",
+    "shortcut": "SUPER + CTRL + PRINT SCREEN"
+  },
+  {
+    "id": "capture-make-webcam-overlay-smaller-while-recording-super-alt",
+    "category": "Capture",
+    "title": "Make webcam overlay smaller while recording",
+    "description": "Press this shortcut whenever you need to make webcam overlay smaller while recording.",
+    "shortcut": "SUPER + ALT + ["
+  },
+  {
+    "id": "capture-make-webcam-overlay-larger-while-recording-super-alt",
+    "category": "Capture",
+    "title": "Make webcam overlay larger while recording",
+    "description": "Press this shortcut to make webcam overlay larger while recording.",
+    "shortcut": "SUPER + ALT + ]"
+  },
+  {
+    "id": "capture-copy-current-url-from-webapp-or-chromium-alt-shift-l",
+    "category": "Capture",
+    "title": "Copy current URL from webapp or Chromium",
+    "description": "Use this key combination to copy current URL from webapp or Chromium.",
+    "shortcut": "ALT + SHIFT + L"
+  },
+  {
+    "id": "capture-download-the-video-on-the-current-page-to-videos-alt-shift-d",
+    "category": "Capture",
+    "title": "Download the video on the current page to ~/Videos",
+    "description": "This shortcut lets you download the video on the current page to ~/Videos without breaking your flow.",
+    "shortcut": "ALT + SHIFT + D"
+  },
+  {
+    "id": "capture-start-stop-dictation-requires-install-ai-dictation-super-ctrl-x",
+    "category": "Capture",
+    "title": "Start/stop dictation (requires Install > AI > Dictation)",
+    "description": "Need to start or stop dictation after installing the Dictation feature? This shortcut gets you there quickly.",
+    "shortcut": "SUPER + CTRL + X"
+  },
+  {
+    "id": "capture-push-to-talk-dictation-requires-install-ai-dictation-f9",
+    "category": "Capture",
+    "title": "Push-to-talk dictation (requires Install > AI > Dictation)",
+    "description": "Keep this shortcut handy when you want to use push-to-talk dictation after installing the Dictation feature.",
+    "shortcut": "F9"
+  },
+  {
+    "id": "notifications-dismiss-latest-notification-super",
+    "category": "Notifications",
+    "title": "Dismiss latest notification",
+    "description": "This shortcut is the quickest keyboard route to dismiss latest notification.",
+    "shortcut": "SUPER + ,"
+  },
+  {
+    "id": "notifications-dismiss-all-notifications-super-shift",
+    "category": "Notifications",
+    "title": "Dismiss all notifications",
+    "description": "Stay on the keyboard: use this shortcut to dismiss all notifications.",
+    "shortcut": "SUPER + SHIFT + ,"
+  },
+  {
+    "id": "notifications-toggle-silencing-notifications-super-ctrl",
+    "category": "Notifications",
+    "title": "Toggle silencing notifications",
+    "description": "One key combination is all it takes to toggle silencing notifications.",
+    "shortcut": "SUPER + CTRL + ,"
+  },
+  {
+    "id": "notifications-invoke-most-recent-notification-super-alt",
+    "category": "Notifications",
+    "title": "Invoke most recent notification",
+    "description": "Reach for this shortcut whenever you need to invoke most recent notification.",
+    "shortcut": "SUPER + ALT + ,"
+  },
+  {
+    "id": "notifications-open-notification-history-super-shift-alt",
+    "category": "Notifications",
+    "title": "Open notification history",
+    "description": "Skip the menus and use this shortcut to open notification history.",
+    "shortcut": "SUPER + SHIFT + ALT + ,"
+  },
+  {
+    "id": "style-pick-a-new-theme-super-ctrl-shift-space",
+    "category": "Style",
+    "title": "Pick a new theme",
+    "description": "This key combination is a fast way to pick a new theme.",
+    "shortcut": "SUPER + CTRL + SHIFT + SPACE"
+  },
+  {
+    "id": "style-pick-theme-background-super-ctrl-space",
+    "category": "Style",
+    "title": "Pick theme background",
+    "description": "Press this shortcut whenever you need to pick theme background.",
+    "shortcut": "SUPER + CTRL + SPACE"
+  },
+  {
+    "id": "style-toggle-transparency-on-a-window-super-backspace",
+    "category": "Style",
+    "title": "Toggle transparency on a window",
+    "description": "Press this shortcut to toggle transparency on a window.",
+    "shortcut": "SUPER + BACKSPACE"
+  },
+  {
+    "id": "style-toggle-single-window-square-aspect-super-ctrl-backspace",
+    "category": "Style",
+    "title": "Toggle single-window square aspect",
+    "description": "Use this key combination to toggle single-window square aspect.",
+    "shortcut": "SUPER + CTRL + BACKSPACE"
+  },
+  {
+    "id": "toggles-toggle-locking-on-idle-super-ctrl-i",
+    "category": "Toggles",
+    "title": "Toggle locking on idle",
+    "description": "This shortcut lets you toggle locking on idle without breaking your flow.",
+    "shortcut": "SUPER + CTRL + I"
+  },
+  {
+    "id": "toggles-toggle-nightlight-display-temperature-super-ctrl-n",
+    "category": "Toggles",
+    "title": "Toggle nightlight display temperature",
+    "description": "Need to toggle nightlight display temperature? This shortcut gets you there quickly.",
+    "shortcut": "SUPER + CTRL + N"
+  },
+  {
+    "id": "toggles-toggle-laptop-display-on-off-super-ctrl-delete",
+    "category": "Toggles",
+    "title": "Toggle laptop display on/off",
+    "description": "Keep this shortcut handy when you want to toggle laptop display on/off.",
+    "shortcut": "SUPER + CTRL + DELETE"
+  },
+  {
+    "id": "toggles-toggle-laptop-display-mirroring-super-ctrl-alt-delete",
+    "category": "Toggles",
+    "title": "Toggle laptop display mirroring",
+    "description": "This shortcut is the quickest keyboard route to toggle laptop display mirroring.",
+    "shortcut": "SUPER + CTRL + ALT + DELETE"
+  },
+  {
+    "id": "toggles-toggle-the-top-bar-super-shift-space",
+    "category": "Toggles",
+    "title": "Toggle the top bar",
+    "description": "Stay on the keyboard: use this shortcut to toggle the top bar.",
+    "shortcut": "SUPER + SHIFT + SPACE"
+  },
+  {
+    "id": "toggles-switch-to-next-audio-output-shift-mute",
+    "category": "Toggles",
+    "title": "Switch to next audio output",
+    "description": "One key combination is all it takes to switch to next audio output.",
+    "shortcut": "SHIFT + MUTE"
+  },
+  {
+    "id": "toggles-switch-to-next-media-source-shift-play",
+    "category": "Toggles",
+    "title": "Switch to next media source",
+    "description": "Reach for this shortcut whenever you need to switch to next media source.",
+    "shortcut": "SHIFT + PLAY"
+  },
+  {
+    "id": "toggles-toggle-window-gaps-super-shift-backspace",
+    "category": "Toggles",
+    "title": "Toggle window gaps",
+    "description": "Skip the menus and use this shortcut to toggle window gaps.",
+    "shortcut": "SUPER + SHIFT + BACKSPACE"
+  },
+  {
+    "id": "reminders-set-a-reminder-super-ctrl-r",
+    "category": "Reminders",
+    "title": "Set a reminder",
+    "description": "This key combination is a fast way to set a reminder.",
+    "shortcut": "SUPER + CTRL + R"
+  },
+  {
+    "id": "reminders-see-all-reminders-super-ctrl-alt-r",
+    "category": "Reminders",
+    "title": "See all reminders",
+    "description": "Press this shortcut whenever you need to show all pending reminders.",
+    "shortcut": "SUPER + CTRL + ALT + R"
+  },
+  {
+    "id": "reminders-clear-all-reminders-super-ctrl-shift-r",
+    "category": "Reminders",
+    "title": "Clear all reminders",
+    "description": "Press this shortcut to clear all reminders.",
+    "shortcut": "SUPER + CTRL + SHIFT + R"
+  },
+  {
+    "id": "notices-show-time-as-notification-super-ctrl-alt-t",
+    "category": "Notices",
+    "title": "Show time as notification",
+    "description": "Use this key combination to show time as notification.",
+    "shortcut": "SUPER + CTRL + ALT + T"
+  },
+  {
+    "id": "notices-show-battery-as-notification-super-ctrl-alt-b",
+    "category": "Notices",
+    "title": "Show battery as notification",
+    "description": "This shortcut lets you show battery as notification without breaking your flow.",
+    "shortcut": "SUPER + CTRL + ALT + B"
+  },
+  {
+    "id": "notices-toggle-weather-as-notification-super-ctrl-alt-w",
+    "category": "Notices",
+    "title": "Toggle weather as notification",
+    "description": "Need to toggle weather as notification? This shortcut gets you there quickly.",
+    "shortcut": "SUPER + CTRL + ALT + W"
+  },
+  {
+    "id": "tmux-primary-prefix",
+    "category": "Tmux · General",
+    "title": "Use the primary Tmux prefix",
+    "description": "Stay in Tmux general and use this shortcut to start a command with the primary Tmux prefix.",
+    "shortcut": "CTRL + SPACE"
+  },
+  {
+    "id": "tmux-compatible-prefix",
+    "category": "Tmux · General",
+    "title": "Use the compatible Tmux prefix",
+    "description": "This is the quick keyboard route to start a command with the traditional Tmux prefix in Tmux general.",
+    "shortcut": "CTRL + B"
+  },
+  {
+    "id": "tmux-panes-split-pane-beside-vertical-prefix-v",
+    "category": "Tmux · Panes",
+    "title": "Split pane beside (vertical)",
+    "description": "In Tmux panes, press this shortcut to split pane beside (vertical).",
+    "shortcut": "PREFIX + V"
+  },
+  {
+    "id": "tmux-panes-split-pane-below-horizontal-prefix-h",
+    "category": "Tmux · Panes",
+    "title": "Split pane below (horizontal)",
+    "description": "Use this key combination while working in Tmux panes to split pane below (horizontal).",
+    "shortcut": "PREFIX + H"
+  },
+  {
+    "id": "tmux-panes-kill-pane-prefix-x",
+    "category": "Tmux · Panes",
+    "title": "Kill pane",
+    "description": "Working in Tmux panes? This shortcut lets you kill pane.",
+    "shortcut": "PREFIX + X"
+  },
+  {
+    "id": "tmux-panes-toggle-pane-zoom-fullscreen-prefix-z",
+    "category": "Tmux · Panes",
+    "title": "Toggle pane zoom (fullscreen)",
+    "description": "Keep this shortcut handy in Tmux panes when you need to toggle pane zoom (fullscreen).",
+    "shortcut": "PREFIX + Z"
+  },
+  {
+    "id": "tmux-panes-split-pane-below-no-prefix-alt-enter",
+    "category": "Tmux · Panes",
+    "title": "Split pane below (no prefix)",
+    "description": "Stay in Tmux panes and use this shortcut to split pane below (no prefix).",
+    "shortcut": "ALT + ENTER"
+  },
+  {
+    "id": "tmux-panes-split-pane-beside-no-prefix-alt-shift-enter",
+    "category": "Tmux · Panes",
+    "title": "Split pane beside (no prefix)",
+    "description": "This is the quick keyboard route to split pane beside (no prefix) in Tmux panes.",
+    "shortcut": "ALT + SHIFT + ENTER"
+  },
+  {
+    "id": "tmux-panes-kill-pane-no-prefix-alt-escape",
+    "category": "Tmux · Panes",
+    "title": "Kill pane (no prefix)",
+    "description": "In Tmux panes, press this shortcut to kill pane (no prefix).",
+    "shortcut": "ALT + ESCAPE"
+  },
+  {
+    "id": "tmux-panes-move-between-panes-ctrl-alt-arrows",
+    "category": "Tmux · Panes",
+    "title": "Move between panes",
+    "description": "Use this key combination while working in Tmux panes to move between panes.",
+    "shortcut": "CTRL + ALT + ARROWS"
+  },
+  {
+    "id": "tmux-panes-resize-panes-ctrl-alt-shift-arrows",
+    "category": "Tmux · Panes",
+    "title": "Resize panes",
+    "description": "Working in Tmux panes? This shortcut lets you resize panes.",
+    "shortcut": "CTRL + ALT + SHIFT + ARROWS"
+  },
+  {
+    "id": "tmux-windows-new-window-prefix-c",
+    "category": "Tmux · Windows",
+    "title": "New window",
+    "description": "Keep this shortcut handy in Tmux windows when you need to create a new Tmux window.",
+    "shortcut": "PREFIX + C"
+  },
+  {
+    "id": "tmux-windows-kill-window-prefix-k",
+    "category": "Tmux · Windows",
+    "title": "Kill window",
+    "description": "Stay in Tmux windows and use this shortcut to kill window.",
+    "shortcut": "PREFIX + K"
+  },
+  {
+    "id": "tmux-windows-rename-window-prefix-r",
+    "category": "Tmux · Windows",
+    "title": "Rename window",
+    "description": "This is the quick keyboard route to rename window in Tmux windows.",
+    "shortcut": "PREFIX + R"
+  },
+  {
+    "id": "tmux-windows-go-to-specific-window-alt-1-9",
+    "category": "Tmux · Windows",
+    "title": "Go to specific window",
+    "description": "In Tmux windows, press this shortcut to go to specific window.",
+    "shortcut": "ALT + 1-9"
+  },
+  {
+    "id": "tmux-windows-move-between-windows-alt-arrow-left-right",
+    "category": "Tmux · Windows",
+    "title": "Move between windows",
+    "description": "Use this key combination while working in Tmux windows to move between windows.",
+    "shortcut": "ALT + ARROW LEFT/RIGHT"
+  },
+  {
+    "id": "tmux-windows-move-window-left-right-alt-shift-arrow-left-right",
+    "category": "Tmux · Windows",
+    "title": "Move window left/right",
+    "description": "Working in Tmux windows? This shortcut lets you move window left/right.",
+    "shortcut": "ALT + SHIFT + ARROW LEFT/RIGHT"
+  },
+  {
+    "id": "tmux-sessions-new-session-prefix-c",
+    "category": "Tmux · Sessions",
+    "title": "New session",
+    "description": "Keep this shortcut handy in Tmux sessions when you need to create a new Tmux session.",
+    "shortcut": "PREFIX + C"
+  },
+  {
+    "id": "tmux-sessions-kill-session-prefix-k",
+    "category": "Tmux · Sessions",
+    "title": "Kill session",
+    "description": "Stay in Tmux sessions and use this shortcut to kill session.",
+    "shortcut": "PREFIX + K"
+  },
+  {
+    "id": "tmux-sessions-rename-session-prefix-r",
+    "category": "Tmux · Sessions",
+    "title": "Rename session",
+    "description": "This is the quick keyboard route to rename session in Tmux sessions.",
+    "shortcut": "PREFIX + R"
+  },
+  {
+    "id": "tmux-sessions-next-session-prefix-n",
+    "category": "Tmux · Sessions",
+    "title": "Next session",
+    "description": "In Tmux sessions, press this shortcut to switch to the next Tmux session.",
+    "shortcut": "PREFIX + N"
+  },
+  {
+    "id": "tmux-sessions-previous-session-prefix-p",
+    "category": "Tmux · Sessions",
+    "title": "Previous session",
+    "description": "Use this key combination while working in Tmux sessions to switch to the previous Tmux session.",
+    "shortcut": "PREFIX + P"
+  },
+  {
+    "id": "tmux-sessions-move-between-sessions-alt-arrow-up-down",
+    "category": "Tmux · Sessions",
+    "title": "Move between sessions",
+    "description": "Working in Tmux sessions? This shortcut lets you move between sessions.",
+    "shortcut": "ALT + ARROW UP/DOWN"
+  },
+  {
+    "id": "tmux-sessions-list-sessions-prefix-s",
+    "category": "Tmux · Sessions",
+    "title": "List sessions",
+    "description": "Keep this shortcut handy in Tmux sessions when you need to list sessions.",
+    "shortcut": "PREFIX + S"
+  },
+  {
+    "id": "tmux-sessions-detach-from-session-prefix-d",
+    "category": "Tmux · Sessions",
+    "title": "Detach from session",
+    "description": "Stay in Tmux sessions and use this shortcut to detach from session.",
+    "shortcut": "PREFIX + D"
+  },
+  {
+    "id": "tmux-copy-mode-vi-style-enter-copy-mode-prefix",
+    "category": "Tmux · Copy mode (vi-style)",
+    "title": "Enter copy mode",
+    "description": "This is the quick keyboard route to enter copy mode in Tmux copy mode (vi-style).",
+    "shortcut": "PREFIX + ["
+  },
+  {
+    "id": "tmux-copy-mode-vi-style-begin-selection-in-copy-mode-v",
+    "category": "Tmux · Copy mode (vi-style)",
+    "title": "Begin selection (in copy mode)",
+    "description": "In Tmux copy mode (vi-style), press this shortcut to begin selection (in copy mode).",
+    "shortcut": "V"
+  },
+  {
+    "id": "tmux-copy-mode-vi-style-copy-selection-in-copy-mode-y",
+    "category": "Tmux · Copy mode (vi-style)",
+    "title": "Copy selection (in copy mode)",
+    "description": "Use this key combination while working in Tmux copy mode (vi-style) to copy selection (in copy mode).",
+    "shortcut": "Y"
+  },
+  {
+    "id": "tmux-general-reload-config-prefix-q",
+    "category": "Tmux · General",
+    "title": "Reload config",
+    "description": "Working in Tmux general? This shortcut lets you reload config.",
+    "shortcut": "PREFIX + Q"
+  },
+  {
+    "id": "tmux-general-show-tmux-keybindings-prefix",
+    "category": "Tmux · General",
+    "title": "Show Tmux keybindings",
+    "description": "Keep this shortcut handy in Tmux general when you need to show Tmux keybindings.",
+    "shortcut": "PREFIX + ?"
+  },
+  {
+    "id": "tmux-general-command-prompt-prefix",
+    "category": "Tmux · General",
+    "title": "Command prompt",
+    "description": "Stay in Tmux general and use this shortcut to open the Tmux command prompt.",
+    "shortcut": "PREFIX + :"
+  },
+  {
+    "id": "ghostty-terminal-new-split-below-ctrl-shift-e",
+    "category": "Ghostty Terminal",
+    "title": "New split below",
+    "description": "This is the quick keyboard route to create a new split below in Ghostty.",
+    "shortcut": "CTRL + SHIFT + E"
+  },
+  {
+    "id": "ghostty-terminal-new-split-besides-ctrl-shift-o",
+    "category": "Ghostty Terminal",
+    "title": "New split besides",
+    "description": "In Ghostty, press this shortcut to create a new split beside the current one.",
+    "shortcut": "CTRL + SHIFT + O"
+  },
+  {
+    "id": "ghostty-terminal-move-between-splits-ctrl-alt-arrows",
+    "category": "Ghostty Terminal",
+    "title": "Move between splits",
+    "description": "Use this key combination while working in Ghostty to move between splits.",
+    "shortcut": "CTRL + ALT + ARROWS"
+  },
+  {
+    "id": "ghostty-terminal-resize-split-by-10-lines-super-ctrl-shift-arrows",
+    "category": "Ghostty Terminal",
+    "title": "Resize split by 10 lines",
+    "description": "Working in Ghostty? This shortcut lets you resize split by 10 lines.",
+    "shortcut": "SUPER + CTRL + SHIFT + ARROWS"
+  },
+  {
+    "id": "ghostty-terminal-resize-split-by-100-lines-super-ctrl-shift-alt-arrows",
+    "category": "Ghostty Terminal",
+    "title": "Resize split by 100 lines",
+    "description": "Keep this shortcut handy in Ghostty when you need to resize split by 100 lines.",
+    "shortcut": "SUPER + CTRL + SHIFT + ALT + ARROWS"
+  },
+  {
+    "id": "ghostty-terminal-new-tab-ctrl-shift-t",
+    "category": "Ghostty Terminal",
+    "title": "New tab",
+    "description": "Stay in Ghostty and use this shortcut to open a new tab.",
+    "shortcut": "CTRL + SHIFT + T"
+  },
+  {
+    "id": "ghostty-terminal-move-between-tabs-ctrl-shift-arrows",
+    "category": "Ghostty Terminal",
+    "title": "Move between tabs",
+    "description": "This is the quick keyboard route to move between tabs in Ghostty.",
+    "shortcut": "CTRL + SHIFT + ARROWS"
+  },
+  {
+    "id": "ghostty-terminal-go-to-specific-tab-alt-numbers",
+    "category": "Ghostty Terminal",
+    "title": "Go to specific tab",
+    "description": "In Ghostty, press this shortcut to go to specific tab.",
+    "shortcut": "ALT + NUMBERS"
+  },
+  {
+    "id": "ghostty-terminal-scroll-the-history-shift-pg-up-down",
+    "category": "Ghostty Terminal",
+    "title": "Scroll the history",
+    "description": "Use this key combination while working in Ghostty to scroll the history.",
+    "shortcut": "SHIFT + PG UP/DOWN"
+  },
+  {
+    "id": "ghostty-terminal-open-link-in-browser-ctrl-left-mouse",
+    "category": "Ghostty Terminal",
+    "title": "Open link in browser",
+    "description": "Working in Ghostty? This shortcut lets you open link in browser.",
+    "shortcut": "CTRL + LEFT MOUSE"
+  },
+  {
+    "id": "file-manager-go-to-path-ctrl-l",
+    "category": "File Manager",
+    "title": "Go to path",
+    "description": "Keep this shortcut handy in the file manager when you need to go to path.",
+    "shortcut": "CTRL + L"
+  },
+  {
+    "id": "file-manager-preview-file-arrows-navigate-space",
+    "category": "File Manager",
+    "title": "Preview file (arrows navigate)",
+    "description": "Stay in the file manager and use this shortcut to preview the selected file and navigate with the arrow keys.",
+    "shortcut": "SPACE"
+  },
+  {
+    "id": "file-manager-go-back-one-folder-backspace",
+    "category": "File Manager",
+    "title": "Go back one folder",
+    "description": "This is the quick keyboard route to go back one folder in the file manager.",
+    "shortcut": "BACKSPACE"
+  },
+  {
+    "id": "neovim-w-lazyvim-navigation-show-command-options-space",
+    "category": "Neovim (w/ lazyvim) · Navigation",
+    "title": "Show command options",
+    "description": "In Neovim navigation, press this shortcut to show command options.",
+    "shortcut": "SPACE"
+  },
+  {
+    "id": "neovim-w-lazyvim-navigation-open-file-via-fuzzy-search-space-space",
+    "category": "Neovim (w/ lazyvim) · Navigation",
+    "title": "Open file via fuzzy search",
+    "description": "Use this key combination while working in Neovim navigation to open file via fuzzy search.",
+    "shortcut": "SPACE SPACE"
+  },
+  {
+    "id": "neovim-w-lazyvim-navigation-toggle-sidebar-space-e",
+    "category": "Neovim (w/ lazyvim) · Navigation",
+    "title": "Toggle sidebar",
+    "description": "Working in Neovim navigation? This shortcut lets you toggle sidebar.",
+    "shortcut": "SPACE E"
+  },
+  {
+    "id": "neovim-w-lazyvim-navigation-show-git-controls-space-g-g",
+    "category": "Neovim (w/ lazyvim) · Navigation",
+    "title": "Show git controls",
+    "description": "Keep this shortcut handy in Neovim navigation when you need to show git controls.",
+    "shortcut": "SPACE G G"
+  },
+  {
+    "id": "neovim-w-lazyvim-navigation-search-file-content-space-s-g",
+    "category": "Neovim (w/ lazyvim) · Navigation",
+    "title": "Search file content",
+    "description": "Stay in Neovim navigation and use this shortcut to search file content.",
+    "shortcut": "SPACE S G"
+  },
+  {
+    "id": "neovim-w-lazyvim-navigation-jump-between-sidebar-and-editor-ctrl-w-w",
+    "category": "Neovim (w/ lazyvim) · Navigation",
+    "title": "Jump between sidebar and editor",
+    "description": "This is the quick keyboard route to jump between sidebar and editor in Neovim navigation.",
+    "shortcut": "CTRL + W W"
+  },
+  {
+    "id": "neovim-w-lazyvim-navigation-change-size-of-sidebar-ctrl-left-right-arrow",
+    "category": "Neovim (w/ lazyvim) · Navigation",
+    "title": "Change size of sidebar",
+    "description": "In Neovim navigation, press this shortcut to change size of sidebar.",
+    "shortcut": "CTRL + LEFT/RIGHT ARROW"
+  },
+  {
+    "id": "neovim-w-lazyvim-navigation-go-to-left-file-tab-shift-h",
+    "category": "Neovim (w/ lazyvim) · Navigation",
+    "title": "Go to left file tab",
+    "description": "Use this key combination while working in Neovim navigation to go to left file tab.",
+    "shortcut": "SHIFT + H"
+  },
+  {
+    "id": "neovim-w-lazyvim-navigation-go-to-right-file-tab-shift-l",
+    "category": "Neovim (w/ lazyvim) · Navigation",
+    "title": "Go to right file tab",
+    "description": "Working in Neovim navigation? This shortcut lets you go to right file tab.",
+    "shortcut": "SHIFT + L"
+  },
+  {
+    "id": "neovim-w-lazyvim-navigation-close-file-tab-space-b-d",
+    "category": "Neovim (w/ lazyvim) · Navigation",
+    "title": "Close file tab",
+    "description": "Keep this shortcut handy in Neovim navigation when you need to close file tab.",
+    "shortcut": "SPACE B D"
+  },
+  {
+    "id": "neovim-w-lazyvim-while-in-sidebar-add-new-file-in-parent-dir-a",
+    "category": "Neovim (w/ lazyvim) · While in sidebar",
+    "title": "Add new file in parent dir",
+    "description": "Stay in Neovim while in sidebar and use this shortcut to add new file in parent dir.",
+    "shortcut": "A"
+  },
+  {
+    "id": "neovim-w-lazyvim-while-in-sidebar-add-new-subdir-in-parent-dir-shift-a",
+    "category": "Neovim (w/ lazyvim) · While in sidebar",
+    "title": "Add new subdir in parent dir",
+    "description": "This is the quick keyboard route to add new subdir in parent dir in Neovim while in sidebar.",
+    "shortcut": "SHIFT + A"
+  },
+  {
+    "id": "neovim-w-lazyvim-while-in-sidebar-delete-highlighted-file-dir-d",
+    "category": "Neovim (w/ lazyvim) · While in sidebar",
+    "title": "Delete highlighted file/dir",
+    "description": "In Neovim while in sidebar, press this shortcut to delete highlighted file/dir.",
+    "shortcut": "D"
+  },
+  {
+    "id": "neovim-w-lazyvim-while-in-sidebar-move-highlighted-file-dir-m",
+    "category": "Neovim (w/ lazyvim) · While in sidebar",
+    "title": "Move highlighted file/dir",
+    "description": "Use this key combination while working in Neovim while in sidebar to move highlighted file/dir.",
+    "shortcut": "M"
+  },
+  {
+    "id": "neovim-w-lazyvim-while-in-sidebar-rename-highlighted-file-dir-r",
+    "category": "Neovim (w/ lazyvim) · While in sidebar",
+    "title": "Rename highlighted file/dir",
+    "description": "Working in Neovim while in sidebar? This shortcut lets you rename highlighted file/dir.",
+    "shortcut": "R"
+  },
+  {
+    "id": "neovim-w-lazyvim-while-in-sidebar-show-help-for-all-commands",
+    "category": "Neovim (w/ lazyvim) · While in sidebar",
+    "title": "Show help for all commands",
+    "description": "Keep this shortcut handy in Neovim while in sidebar when you need to show help for all commands.",
+    "shortcut": "?"
+  },
+  {
+    "id": "quick-emojis-insert-with-the-smile-mnemonic-capslock-m-s",
+    "category": "Quick Emojis",
+    "title": "Insert 😄 with the smile mnemonic",
+    "description": "This short XCompose sequence puts 😄 into the active app.",
+    "shortcut": "CAPSLOCK M S"
+  },
+  {
+    "id": "quick-emojis-insert-with-the-cry-mnemonic-capslock-m-c",
+    "category": "Quick Emojis",
+    "title": "Insert 😂 with the cry mnemonic",
+    "description": "Skip the picker and type this sequence to insert 😂.",
+    "shortcut": "CAPSLOCK M C"
+  },
+  {
+    "id": "quick-emojis-insert-with-the-love-mnemonic-capslock-m-l",
+    "category": "Quick Emojis",
+    "title": "Insert 😍 with the love mnemonic",
+    "description": "Type the love mnemonic to insert 😍 without opening the emoji picker.",
+    "shortcut": "CAPSLOCK M L"
+  },
+  {
+    "id": "quick-emojis-insert-victory-with-the-victory-mnemonic-capslock-m-v",
+    "category": "Quick Emojis",
+    "title": "Insert ✌️ with the victory mnemonic",
+    "description": "Press this XCompose sequence whenever you need a quick ✌️.",
+    "shortcut": "CAPSLOCK M V"
+  },
+  {
+    "id": "quick-emojis-insert-heart-with-the-heart-mnemonic-capslock-m-h",
+    "category": "Quick Emojis",
+    "title": "Insert ❤️ with the heart mnemonic",
+    "description": "Keep the heart mnemonic handy for inserting ❤️ directly.",
+    "shortcut": "CAPSLOCK M H"
+  },
+  {
+    "id": "quick-emojis-insert-with-the-yes-mnemonic-capslock-m-y",
+    "category": "Quick Emojis",
+    "title": "Insert 👍 with the yes mnemonic",
+    "description": "This short XCompose sequence puts 👍 into the active app.",
+    "shortcut": "CAPSLOCK M Y"
+  },
+  {
+    "id": "quick-emojis-insert-with-the-no-mnemonic-capslock-m-n",
+    "category": "Quick Emojis",
+    "title": "Insert 👎 with the no mnemonic",
+    "description": "Skip the picker and type this sequence to insert 👎.",
+    "shortcut": "CAPSLOCK M N"
+  },
+  {
+    "id": "quick-emojis-insert-with-the-fuck-mnemonic-capslock-m-f",
+    "category": "Quick Emojis",
+    "title": "Insert 🖕 with the fuck mnemonic",
+    "description": "Type the fuck mnemonic to insert 🖕 without opening the emoji picker.",
+    "shortcut": "CAPSLOCK M F"
+  },
+  {
+    "id": "quick-emojis-insert-with-the-wish-mnemonic-capslock-m-w",
+    "category": "Quick Emojis",
+    "title": "Insert 🤞 with the wish mnemonic",
+    "description": "Press this XCompose sequence whenever you need a quick 🤞.",
+    "shortcut": "CAPSLOCK M W"
+  },
+  {
+    "id": "quick-emojis-insert-with-the-rock-mnemonic-capslock-m-r",
+    "category": "Quick Emojis",
+    "title": "Insert 🤘 with the rock mnemonic",
+    "description": "Keep the rock mnemonic handy for inserting 🤘 directly.",
+    "shortcut": "CAPSLOCK M R"
+  },
+  {
+    "id": "quick-emojis-insert-with-the-kiss-mnemonic-capslock-m-k",
+    "category": "Quick Emojis",
+    "title": "Insert 😘 with the kiss mnemonic",
+    "description": "This short XCompose sequence puts 😘 into the active app.",
+    "shortcut": "CAPSLOCK M K"
+  },
+  {
+    "id": "quick-emojis-insert-with-the-eyeroll-mnemonic-capslock-m-e",
+    "category": "Quick Emojis",
+    "title": "Insert 🙄 with the eyeroll mnemonic",
+    "description": "Skip the picker and type this sequence to insert 🙄.",
+    "shortcut": "CAPSLOCK M E"
+  },
+  {
+    "id": "quick-emojis-insert-with-the-wink-mnemonic-capslock-m-i",
+    "category": "Quick Emojis",
+    "title": "Insert 😉 with the wink mnemonic",
+    "description": "Type the wink mnemonic to insert 😉 without opening the emoji picker.",
+    "shortcut": "CAPSLOCK M I"
+  },
+  {
+    "id": "quick-emojis-insert-with-the-pray-mnemonic-capslock-m-p",
+    "category": "Quick Emojis",
+    "title": "Insert 🙏 with the pray mnemonic",
+    "description": "Press this XCompose sequence whenever you need a quick 🙏.",
+    "shortcut": "CAPSLOCK M P"
+  },
+  {
+    "id": "quick-emojis-insert-with-the-drool-mnemonic-capslock-m-d",
+    "category": "Quick Emojis",
+    "title": "Insert 🤤 with the drool mnemonic",
+    "description": "Keep the drool mnemonic handy for inserting 🤤 directly.",
+    "shortcut": "CAPSLOCK M D"
+  },
+  {
+    "id": "quick-emojis-insert-with-the-money-mnemonic-capslock-m-m",
+    "category": "Quick Emojis",
+    "title": "Insert 💰 with the money mnemonic",
+    "description": "This short XCompose sequence puts 💰 into the active app.",
+    "shortcut": "CAPSLOCK M M"
+  },
+  {
+    "id": "quick-emojis-insert-with-the-xellebrate-mnemonic-capslock-m-x",
+    "category": "Quick Emojis",
+    "title": "Insert 🎉 with the xellebrate mnemonic",
+    "description": "Skip the picker and type this sequence to insert 🎉.",
+    "shortcut": "CAPSLOCK M X"
+  },
+  {
+    "id": "quick-emojis-insert-with-the-100-mnemonic-capslock-m-1",
+    "category": "Quick Emojis",
+    "title": "Insert 💯 with the 100% mnemonic",
+    "description": "Type the 100% mnemonic to insert 💯 without opening the emoji picker.",
+    "shortcut": "CAPSLOCK M 1"
+  },
+  {
+    "id": "quick-emojis-insert-with-the-toast-mnemonic-capslock-m-t",
+    "category": "Quick Emojis",
+    "title": "Insert 🥂 with the toast mnemonic",
+    "description": "Press this XCompose sequence whenever you need a quick 🥂.",
+    "shortcut": "CAPSLOCK M T"
+  },
+  {
+    "id": "quick-emojis-insert-with-the-ok-mnemonic-capslock-m-o",
+    "category": "Quick Emojis",
+    "title": "Insert 👌 with the ok mnemonic",
+    "description": "Keep the ok mnemonic handy for inserting 👌 directly.",
+    "shortcut": "CAPSLOCK M O"
+  },
+  {
+    "id": "quick-emojis-insert-with-the-greeting-mnemonic-capslock-m-g",
+    "category": "Quick Emojis",
+    "title": "Insert 👋 with the greeting mnemonic",
+    "description": "This short XCompose sequence puts 👋 into the active app.",
+    "shortcut": "CAPSLOCK M G"
+  },
+  {
+    "id": "quick-emojis-insert-with-the-arm-mnemonic-capslock-m-a",
+    "category": "Quick Emojis",
+    "title": "Insert 💪 with the arm mnemonic",
+    "description": "Skip the picker and type this sequence to insert 💪.",
+    "shortcut": "CAPSLOCK M A"
+  },
+  {
+    "id": "quick-emojis-insert-with-the-blowing-mnemonic-capslock-m-b",
+    "category": "Quick Emojis",
+    "title": "Insert 🤯 with the blowing mnemonic",
+    "description": "Type the blowing mnemonic to insert 🤯 without opening the emoji picker.",
+    "shortcut": "CAPSLOCK M B"
+  },
+  {
+    "id": "quick-completions-insert-mdash-capslock-space-space",
+    "category": "Quick Completions",
+    "title": "Insert — (mdash)",
+    "description": "Type this XCompose shortcut to insert — (mdash) into the active app.",
+    "shortcut": "CAPSLOCK SPACE SPACE"
+  },
+  {
+    "id": "quick-completions-insert-your-name-as-entered-on-setup-capslock-space-n",
+    "category": "Quick Completions",
+    "title": "Insert Your name (as entered on setup)",
+    "description": "Use this sequence whenever you want to enter Your name (as entered on setup) without retyping it.",
+    "shortcut": "CAPSLOCK SPACE N"
+  },
+  {
+    "id": "quick-completions-insert-your-email-as-entered-on-setup-capslock-space-e",
+    "category": "Quick Completions",
+    "title": "Insert Your email (as entered on setup)",
+    "description": "This quick completion inserts Your email (as entered on setup) wherever the cursor is active.",
+    "shortcut": "CAPSLOCK SPACE E"
+  }
+]
