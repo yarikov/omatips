@@ -3,7 +3,7 @@
 Master Omarchy keyboard shortcuts with native notifications and Anki-style
 spaced repetition.
 
-OmaTips is an Omarchy 4 shell plugin with 234 concise English lessons based on
+OmaTips is an Omarchy 4 shell plugin with 234 concise tips based on
 the official [Omarchy hotkeys manual](https://omarchy.org/manual/hotkeys/).
 The course covers desktop navigation, window management, applications,
 capture tools, Tmux, Ghostty, the file manager, Neovim, quick emojis, and
@@ -16,13 +16,11 @@ a time and brings them back for review until they become muscle memory.
 
 ## Install
 
-Once this repository is available at a Git URL:
+Install and enable OmaTips from GitHub:
 
 ```sh
 omarchy plugin add https://github.com/yarikov/omatips --enable
 ```
-
-This places the widget in the center section of the bar.
 
 Plugins run as unsandboxed code inside `omarchy-shell`; review third-party
 plugin code before enabling it.
