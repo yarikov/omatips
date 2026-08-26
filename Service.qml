@@ -154,7 +154,17 @@ Item {
     id: storageInit
     command: ["mkdir", "-p", root.stateDir]
     onExited: function(exitCode) {
+      if (exitCode === 0) stateBackupInit.running = true
+      else console.warn("OmaTips: could not create state directory")
+    }
+  }
+
+  Process {
+    id: stateBackupInit
+    command: ["touch", root.stateBackupPath]
+    onExited: function(exitCode) {
       root.storageReady = exitCode === 0
+      if (!root.storageReady) console.warn("OmaTips: could not initialize state backup")
       root.maybeInitialize()
     }
   }
