@@ -79,6 +79,11 @@ Course state is stored at:
 ${XDG_STATE_HOME:-~/.local/state}/omarchy/omatips/state.json
 ```
 
+The previous valid state is kept alongside it as `state.json.bak`. Before a new
+state is written, the last known valid state becomes the backup. If the primary
+file cannot be read or is invalid during startup, OmaTips restores that earlier
+version instead of replacing it with an empty course.
+
 ## Develop and verify
 
 From the repository root:

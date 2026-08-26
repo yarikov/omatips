@@ -131,6 +131,18 @@ TestCase {
     compare(Object.keys(parsed.cards).length, 0)
   }
 
+  function test_storedStateValidationRejectsCorruptOrIncompleteData() {
+    verify(!TipModel.validStoredState("{not json"))
+    verify(!TipModel.validStoredState("{}"))
+    verify(!TipModel.validStoredState(JSON.stringify({
+      schemaVersion: 1, nextNewIndex: 1, cards: {}
+    })))
+  }
+
+  function test_storedStateValidationAcceptsCurrentState() {
+    verify(TipModel.validStoredState(JSON.stringify(TipModel.defaultState())))
+  }
+
   function test_currentSchemaStatePreservesProgress() {
     var storedState = {
       schemaVersion: 1,

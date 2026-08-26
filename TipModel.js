@@ -62,6 +62,16 @@ function parseState(raw, tips, now) {
   }
 }
 
+function validStoredState(raw) {
+  var value
+  try { value = JSON.parse(String(raw || "")) } catch (e) { return false }
+  if (!value || typeof value !== "object" || Array.isArray(value)) return false
+  if (value.schemaVersion !== SCHEMA_VERSION) return false
+  if (!isFinite(Number(value.nextNewIndex)) || Number(value.nextNewIndex) < 0) return false
+  if (!value.cards || typeof value.cards !== "object" || Array.isArray(value.cards)) return false
+  return typeof value.lastNotificationDate === "string"
+}
+
 function dueReviews(state, tips, now) {
   var normalized = normalizedState(state, tips, now)
   var due = []

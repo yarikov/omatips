@@ -12,6 +12,7 @@ Item {
   readonly property string stateHome: Quickshell.env("XDG_STATE_HOME") || (Quickshell.env("HOME") + "/.local/state")
   readonly property string stateDir: stateHome + "/omarchy/omatips"
   readonly property string statePath: stateDir + "/state.json"
+  readonly property string stateBackupPath: statePath + ".bak"
   readonly property string tipsPath: manifest && manifest.__sourceDir ? manifest.__sourceDir + "/tips.json" : ""
 
   property var tips: []
@@ -21,6 +22,8 @@ Item {
   property bool storageReady: false
   property bool tipsReady: false
   property bool initialized: false
+  property bool recoveringState: false
+  property string lastValidStateRaw: ""
   property bool actionBusy: false
 
   readonly property var lockService: shell && shell.firstPartyServiceFor
@@ -48,14 +51,46 @@ Item {
   }
 
   function persist() {
-    stateFile.setText(JSON.stringify(studyState, null, 2) + "\n")
+    var serialized = JSON.stringify(studyState, null, 2) + "\n"
+    if (lastValidStateRaw !== "" && lastValidStateRaw !== serialized)
+      stateBackupFile.setText(lastValidStateRaw)
+    stateFile.setText(serialized)
+    lastValidStateRaw = serialized
   }
 
-  function applyStoredState(raw) {
+  function applyPrimaryState(raw) {
     nowMs = Date.now()
     studyState = TipModel.parseState(raw, tips, nowMs)
+    var serialized = JSON.stringify(studyState, null, 2) + "\n"
+    if (String(raw) !== serialized) {
+      stateBackupFile.setText(String(raw))
+      stateFile.setText(serialized)
+    }
+    lastValidStateRaw = serialized
+    Qt.callLater(checkQueue)
+  }
+
+  function applyBackupState(raw) {
+    nowMs = Date.now()
+    studyState = TipModel.parseState(raw, tips, nowMs)
+    lastValidStateRaw = JSON.stringify(studyState, null, 2) + "\n"
+    stateFile.setText(lastValidStateRaw)
+    Qt.callLater(checkQueue)
+  }
+
+  function startNewCourse() {
+    nowMs = Date.now()
+    studyState = TipModel.defaultState()
+    lastValidStateRaw = ""
     persist()
     Qt.callLater(checkQueue)
+  }
+
+  function recoverStoredState() {
+    if (recoveringState) return
+    recoveringState = true
+    console.warn("OmaTips: primary state unavailable or invalid; trying backup")
+    stateBackupFile.reload()
   }
 
   function stateWithNotification(notificationDate) {
@@ -145,10 +180,36 @@ Item {
     atomicWrites: true
     printErrors: false
     onLoaded: {
-      if (root.initialized) root.applyStoredState(text())
+      if (!root.initialized) return
+      if (TipModel.validStoredState(text())) root.applyPrimaryState(text())
+      else root.recoverStoredState()
     }
     onLoadFailed: {
-      if (root.initialized) root.applyStoredState("")
+      if (root.initialized) root.recoverStoredState()
+    }
+  }
+
+  FileView {
+    id: stateBackupFile
+    path: root.stateBackupPath
+    atomicWrites: true
+    printErrors: false
+    onLoaded: {
+      if (!root.recoveringState) return
+      root.recoveringState = false
+      if (TipModel.validStoredState(text())) {
+        console.warn("OmaTips: restored study progress from backup")
+        root.applyBackupState(text())
+      } else {
+        console.warn("OmaTips: backup state is invalid; starting a new course")
+        root.startNewCourse()
+      }
+    }
+    onLoadFailed: {
+      if (!root.recoveringState) return
+      root.recoveringState = false
+      console.warn("OmaTips: no readable state backup; starting a new course")
+      root.startNewCourse()
     }
   }
 
