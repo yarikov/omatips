@@ -143,6 +143,53 @@ TestCase {
     verify(TipModel.validStoredState(JSON.stringify(TipModel.defaultState())))
   }
 
+  function test_stateSizeLimitAcceptsExactBoundary() {
+    verify(TipModel.stateSizeAllowed(TipModel.MAX_STATE_BYTES))
+  }
+
+  function test_stateSizeLimitRejectsFirstOversizedByte() {
+    verify(!TipModel.stateSizeAllowed(TipModel.MAX_STATE_BYTES + 1))
+  }
+
+  function test_stateSizeLimitRejectsInvalidLengths() {
+    verify(!TipModel.stateSizeAllowed(-1))
+    verify(!TipModel.stateSizeAllowed(Infinity))
+    verify(!TipModel.stateSizeAllowed("invalid"))
+  }
+
+  function test_stateSizeLimitReadsArrayBufferByteLength() {
+    var data = new ArrayBuffer(8)
+    compare(data.length, undefined)
+    compare(data.byteLength, 8)
+    verify(TipModel.stateSizeAllowed(data.byteLength))
+    verify(!TipModel.stateSizeAllowed(TipModel.MAX_STATE_BYTES + 1))
+  }
+
+  function test_utf8ByteLengthMatchesSerializedText() {
+    compare(TipModel.utf8ByteLength("ascii"), 5)
+    compare(TipModel.utf8ByteLength("привет"), 12)
+    compare(TipModel.utf8ByteLength("😀"), 4)
+  }
+
+  function test_completeCurrentCourseFitsStateSizeLimit() {
+    var state = TipModel.defaultState()
+    state.nextNewIndex = 234
+    for (var i = 0; i < 234; i++) {
+      state.cards["representative-card-id-" + i] = {
+        dueAt: 9999999999999,
+        intervalMinutes: 9999999999999,
+        ease: 3.5,
+        repetitions: 999999,
+        lapses: 999999
+      }
+    }
+    state.lastNotificationDate = "2026-08-27"
+
+    var serialized = JSON.stringify(state, null, 2) + "\n"
+    verify(serialized.length < TipModel.MAX_STATE_BYTES / 10)
+    verify(TipModel.stateSizeAllowed(serialized.length))
+  }
+
   function test_currentSchemaStatePreservesProgress() {
     var storedState = {
       schemaVersion: 1,

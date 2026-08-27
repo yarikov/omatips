@@ -2,6 +2,30 @@
 
 var SCHEMA_VERSION = 1
 var MINUTE_MS = 60 * 1000
+var MAX_STATE_BYTES = 1024 * 1024
+
+function stateSizeAllowed(byteLength) {
+  var length = Number(byteLength)
+  return isFinite(length) && length >= 0 && length <= MAX_STATE_BYTES
+}
+
+function utf8ByteLength(value) {
+  var text = String(value || "")
+  var bytes = 0
+  for (var i = 0; i < text.length; i++) {
+    var code = text.charCodeAt(i)
+    if (code < 0x80) bytes += 1
+    else if (code < 0x800) bytes += 2
+    else if (code >= 0xd800 && code <= 0xdbff
+             && i + 1 < text.length
+             && text.charCodeAt(i + 1) >= 0xdc00
+             && text.charCodeAt(i + 1) <= 0xdfff) {
+      bytes += 4
+      i += 1
+    } else bytes += 3
+  }
+  return bytes
+}
 
 function opensPluginForNotificationAction(value) {
   var action = String(value || "").trim()
