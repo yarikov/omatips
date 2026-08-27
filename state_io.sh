@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
+readonly PATH=/usr/bin:/bin
+export PATH
 
 mode=${1:-}
 
@@ -25,16 +27,16 @@ case "$mode" in
     if [[ "$mode" == restore ]]; then
       if [[ -e "$primary" || -L "$primary" ]]; then
         corrupt="${primary}.corrupt.$(date +%s).$$"
-        mv -- "$primary" "$corrupt"
+        mv -T -- "$primary" "$corrupt"
         sync -f -- "$state_dir"
       fi
     elif [[ -e "$primary" || -L "$primary" ]]; then
       [[ -f "$primary" && ! -L "$primary" ]] || exit 22
-      mv -f -- "$primary" "$backup"
+      mv -T -f -- "$primary" "$backup"
       sync -f -- "$state_dir"
     fi
 
-    mv -f -- "$pending" "$primary"
+    mv -T -f -- "$pending" "$primary"
     sync -f -- "$primary"
     sync -f -- "$state_dir"
     ;;

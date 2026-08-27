@@ -222,7 +222,7 @@ Item {
     blockAllReads: true
     printErrors: false
     onSaved: {
-      stateCommitProcess.command = ["bash", root.stateIoPath, root.writingMode,
+      stateCommitProcess.command = ["/usr/bin/bash", root.stateIoPath, root.writingMode,
         root.statePendingPath, root.statePath, root.stateBackupPath,
         String(root.maxStateBytes)]
       stateCommitProcess.running = true
@@ -232,7 +232,7 @@ Item {
 
   Process {
     id: stateReadProcess
-    command: ["bash", root.stateIoPath, "read", root.statePath, String(root.maxStateBytes)]
+    command: ["/usr/bin/bash", root.stateIoPath, "read", root.statePath, String(root.maxStateBytes)]
     stdout: StdioCollector {
       id: stateReadOutput
       waitForEnd: true
@@ -261,7 +261,7 @@ Item {
 
   Process {
     id: stateBackupReadProcess
-    command: ["bash", root.stateIoPath, "read", root.stateBackupPath, String(root.maxStateBytes)]
+    command: ["/usr/bin/bash", root.stateIoPath, "read", root.stateBackupPath, String(root.maxStateBytes)]
     stdout: StdioCollector {
       id: stateBackupReadOutput
       waitForEnd: true

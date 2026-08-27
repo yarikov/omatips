@@ -237,6 +237,16 @@ TestCase {
     compare(parsed.lastNotificationDate, "2026-08-25")
   }
 
+  function test_stateCardsDoNotAllowPrototypePollution() {
+    var raw = '{"schemaVersion":1,"nextNewIndex":0,"cards":{'
+      + '"__proto__":{"dueAt":1},"constructor":{"dueAt":2}},'
+      + '"lastNotificationDate":""}'
+    var parsed = TipModel.parseState(raw, tips, 1000)
+    compare(Object.getPrototypeOf(parsed.cards), null)
+    compare(Object.keys(parsed.cards).length, 0)
+    compare(parsed.cards.dueAt, undefined)
+  }
+
   function test_nonCurrentSchemaStateResets() {
     var oldState = {
       schemaVersion: 2,

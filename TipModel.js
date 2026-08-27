@@ -36,7 +36,7 @@ function defaultState() {
   return {
     schemaVersion: SCHEMA_VERSION,
     nextNewIndex: 0,
-    cards: {},
+    cards: Object.create(null),
     lastNotificationDate: ""
   }
 }
@@ -69,11 +69,12 @@ function normalizedState(value, tips, now) {
   next.lastNotificationDate = /^\d{4}-\d{2}-\d{2}$/.test(String(value.lastNotificationDate || ""))
     ? String(value.lastNotificationDate) : ""
 
-  var known = {}
+  var known = Object.create(null)
   for (var i = 0; i < tips.length; i++) known[tips[i].id] = true
   var cards = value.cards && typeof value.cards === "object" ? value.cards : {}
   for (var id in cards) {
-    if (!known[id]) continue
+    if (!Object.prototype.hasOwnProperty.call(cards, id)
+        || !Object.prototype.hasOwnProperty.call(known, id)) continue
     var card = normalizedCard(cards[id])
     if (card) next.cards[id] = card
   }
@@ -151,6 +152,7 @@ function nextDueAt(state, tips, now) {
   if (normalized.nextNewIndex < tips.length) return now
   var earliest = -1
   for (var id in normalized.cards) {
+    if (!Object.prototype.hasOwnProperty.call(normalized.cards, id)) continue
     if (normalized.cards[id].completed) continue
     var due = normalized.cards[id].dueAt
     if (earliest < 0 || due < earliest) earliest = due
@@ -244,8 +246,10 @@ function review(input, tips, tipId, rating, now) {
   var card = scheduledCard(item.card, rating, now)
   if (!card) return { state: state, reviewed: false }
 
-  var cards = {}
-  for (var id in state.cards) cards[id] = state.cards[id]
+  var cards = Object.create(null)
+  for (var id in state.cards) {
+    if (Object.prototype.hasOwnProperty.call(state.cards, id)) cards[id] = state.cards[id]
+  }
   cards[tipId] = card
   state.cards = cards
   if (item.isNew) state.nextNewIndex = Math.min(tips.length, state.nextNewIndex + 1)
