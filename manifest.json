@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "author": "Dmitry Yarikov",
   "license": "MIT",
-  "description": "Learn 234 Omarchy hotkey lessons with Anki-style spaced repetition",
+  "description": "Learn 229 Omarchy hotkey lessons with Anki-style spaced repetition",
   "kinds": [
     "service",
     "bar-widget"

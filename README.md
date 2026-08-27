@@ -3,7 +3,7 @@
 Master Omarchy keyboard shortcuts with native notifications and Anki-style
 spaced repetition.
 
-OmaTips is an Omarchy 4 shell plugin with 234 concise tips based on
+OmaTips is an Omarchy 4 shell plugin with 229 concise tips based on
 the official [Omarchy hotkeys manual](https://omarchy.org/manual/hotkeys/).
 The course covers desktop navigation, window management, applications,
 capture tools, Tmux, Ghostty, the file manager, Neovim, quick emojis, and

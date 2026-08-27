@@ -5,8 +5,8 @@ repo_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
 tips="$repo_dir/tips.json"
 
 jq -e '
-  length == 234
-  and ([.[].id] | unique | length == 234)
+  length == 229
+  and ([.[].id] | unique | length == 229)
   and all(.[];
     (.id | type == "string" and length > 0)
     and (.category | type == "string" and length > 0)
@@ -25,4 +25,4 @@ jq -e '
   )
 ' "$tips" >/dev/null
 
-echo "tips.json: 234 unique, valid hotkey tips"
+echo "tips.json: 229 unique, valid hotkey tips"
