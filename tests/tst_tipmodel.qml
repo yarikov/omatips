@@ -89,6 +89,37 @@ TestCase {
     compare(card.ease, 2.3)
   }
 
+  function test_threeConsecutiveEasyRatingsCompleteCard() {
+    var singleTip = [tips[0]]
+    var first = TipModel.review(TipModel.defaultState(), singleTip, "one", "easy", 0)
+    compare(first.card.easyStreak, 1)
+    verify(!first.card.completed)
+
+    var second = TipModel.review(first.state, singleTip, "one", "easy", first.card.dueAt)
+    compare(second.card.easyStreak, 2)
+    verify(!second.card.completed)
+    compare(TipModel.ratingIntervalLabel(second.card, "easy", second.card.dueAt), "Done")
+
+    var third = TipModel.review(second.state, singleTip, "one", "easy", second.card.dueAt)
+    compare(third.card.easyStreak, 3)
+    verify(third.card.completed)
+    compare(TipModel.currentDue(third.state, singleTip, third.card.dueAt), null)
+    compare(TipModel.nextDueAt(third.state, singleTip, third.card.dueAt), -1)
+  }
+
+  function test_nonEasyRatingResetsEasyStreak() {
+    var card = TipModel.scheduledCard(null, "easy", 0)
+    card = TipModel.scheduledCard(card, "easy", card.dueAt)
+    compare(card.easyStreak, 2)
+
+    card = TipModel.scheduledCard(card, "good", card.dueAt)
+    compare(card.easyStreak, 0)
+    card = TipModel.scheduledCard(card, "easy", card.dueAt)
+    card = TipModel.scheduledCard(card, "easy", card.dueAt)
+    verify(!card.completed)
+    compare(card.easyStreak, 2)
+  }
+
   function test_queueIsEmptyWhenEverythingIsScheduledForLater() {
     var state = TipModel.defaultState()
     state = TipModel.review(state, tips, "one", "good", 0).state

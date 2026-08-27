@@ -59,6 +59,9 @@ Ease starts at `2.5`. Successful reviews make intervals grow from the card's
 current interval, while difficult or forgotten cards grow more slowly or
 return to the initial steps.
 
+Choosing **Easy** three reviews in a row completes the card permanently, so it
+no longer appears in the study queue. Any other rating resets this streak.
+
 Button labels stay compact as intervals grow: `m` is minutes, `h` is hours,
 `d` is days, `mo` is 30-day months, and `y` is 365-day years. A trailing `+`
 means the exact interval contains a smaller remainder—for example, `27d+`

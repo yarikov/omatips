@@ -53,7 +53,9 @@ function normalizedCard(value) {
     intervalMinutes: Math.max(0, finiteNumber(value.intervalMinutes, 0)),
     ease: Math.max(1.3, finiteNumber(value.ease, 2.5)),
     repetitions: Math.max(0, Math.floor(finiteNumber(value.repetitions, 0))),
-    lapses: Math.max(0, Math.floor(finiteNumber(value.lapses, 0)))
+    lapses: Math.max(0, Math.floor(finiteNumber(value.lapses, 0))),
+    easyStreak: Math.max(0, Math.min(3, Math.floor(finiteNumber(value.easyStreak, 0)))),
+    completed: value.completed === true
   }
 }
 
@@ -102,7 +104,7 @@ function dueReviews(state, tips, now) {
   for (var i = 0; i < normalized.nextNewIndex; i++) {
     var tip = tips[i]
     var card = normalized.cards[tip.id]
-    if (card && card.dueAt <= now)
+    if (card && !card.completed && card.dueAt <= now)
       due.push({ tip: tip, index: i, isNew: false, card: card, dueAt: card.dueAt })
   }
   due.sort(function(a, b) {
@@ -149,6 +151,7 @@ function nextDueAt(state, tips, now) {
   if (normalized.nextNewIndex < tips.length) return now
   var earliest = -1
   for (var id in normalized.cards) {
+    if (normalized.cards[id].completed) continue
     var due = normalized.cards[id].dueAt
     if (earliest < 0 || due < earliest) earliest = due
   }
@@ -161,12 +164,15 @@ function scheduledCard(previous, rating, now) {
     intervalMinutes: 0,
     ease: 2.5,
     repetitions: 0,
-    lapses: 0
+    lapses: 0,
+    easyStreak: 0,
+    completed: false
   }
   var interval
   var ease = old.ease
   var repetitions = old.repetitions
   var lapses = old.lapses
+  var easyStreak = rating === "easy" ? old.easyStreak + 1 : 0
 
   if (rating === "again") {
     interval = 1
@@ -193,7 +199,9 @@ function scheduledCard(previous, rating, now) {
     intervalMinutes: interval,
     ease: ease,
     repetitions: repetitions,
-    lapses: lapses
+    lapses: lapses,
+    easyStreak: easyStreak,
+    completed: easyStreak >= 3
   }
 }
 
@@ -225,7 +233,8 @@ function formatIntervalMinutes(value) {
 
 function ratingIntervalLabel(previous, rating, now) {
   var card = scheduledCard(previous, rating, now)
-  return card ? formatIntervalMinutes(card.intervalMinutes) : ""
+  if (!card) return ""
+  return card.completed ? "Done" : formatIntervalMinutes(card.intervalMinutes)
 }
 
 function review(input, tips, tipId, rating, now) {
