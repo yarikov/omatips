@@ -300,7 +300,7 @@ function parseTips(raw) {
   for (var i = 0; i < parsed.length; i++) {
     var tip = parsed[i]
     if (!tip || typeof tip.id !== "string" || !tip.id || seen[tip.id]) return []
-    if (typeof tip.category !== "string" || !tip.category || typeof tip.title !== "string" || !tip.title || typeof tip.description !== "string" || !tip.description || !validAction(tip.action)) return []
+    if (typeof tip.category !== "string" || !tip.category || typeof tip.title !== "string" || !tip.title || !validAction(tip.action)) return []
     seen[tip.id] = true
     valid.push(tip)
   }

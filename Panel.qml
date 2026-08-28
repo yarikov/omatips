@@ -130,15 +130,6 @@ Panel {
             wrapMode: Text.WordWrap
           }
 
-          Text {
-            width: parent.width
-            text: root.tip ? root.tip.description : ""
-            color: root.bar ? root.bar.foreground : Color.foreground
-            font.family: root.bar ? root.bar.fontFamily : Style.font.family
-            font.pixelSize: Style.font.body
-            wrapMode: Text.WordWrap
-          }
-
           BorderSurface {
             width: parent.width
             implicitHeight: exampleText.implicitHeight + Style.space(20)

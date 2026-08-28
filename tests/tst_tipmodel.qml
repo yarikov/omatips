@@ -6,9 +6,9 @@ TestCase {
   name: "TipModel"
 
   readonly property var tips: [
-    { id: "one", category: "Test", title: "One", description: "First" },
-    { id: "two", category: "Test", title: "Two", description: "Second" },
-    { id: "three", category: "Test", title: "Three", description: "Third" }
+    { id: "one", category: "Test", title: "One" },
+    { id: "two", category: "Test", title: "Two" },
+    { id: "three", category: "Test", title: "Three" }
   ]
 
   function test_newCourseStartsWithFirstTipImmediately() {
@@ -273,6 +273,15 @@ TestCase {
     verify(!TipModel.validAction({ kind: "exec", label: "No", argv: ["bash", "-c", "anything"] }))
   }
 
+  function test_parseTipsDoesNotRequireDescription() {
+    var parsed = TipModel.parseTips('[{"id":"one","category":"Test","title":"One"}]')
+    compare(parsed.length, 1)
+    compare(parsed[0].title, "One")
+
+    var legacy = TipModel.parseTips('[{"id":"one","category":"Test","title":"One","description":"Legacy"}]')
+    compare(legacy.length, 1)
+  }
+
   function test_notificationClickOpensPlugin() {
     verify(TipModel.opensPluginForNotificationAction("default"))
     verify(TipModel.opensPluginForNotificationAction("open\n"))
@@ -288,7 +297,7 @@ TestCase {
   function test_expandedCourseContinuesAfterFirstThirtyTips() {
     var expandedTips = []
     for (var i = 0; i < 31; i++)
-      expandedTips.push({ id: "tip-" + (i + 1), category: "Test", title: "Tip " + (i + 1), description: "Test" })
+      expandedTips.push({ id: "tip-" + (i + 1), category: "Test", title: "Tip " + (i + 1) })
 
     var state = TipModel.defaultState()
     state.nextNewIndex = 30

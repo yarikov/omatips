@@ -11,7 +11,6 @@ jq -e '
     (.id | type == "string" and length > 0)
     and (.category | type == "string" and length > 0)
     and (.title | type == "string" and length > 0)
-    and (.description | type == "string" and length > 0)
     and (.shortcut | type == "string" and length > 0)
     and ((.action? // null) == null or
       (.action.kind == "copy" and (.action.text | type == "string" and length > 0)) or
