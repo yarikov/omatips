@@ -82,16 +82,10 @@ Course state is stored at:
 ${XDG_STATE_HOME:-~/.local/state}/omarchy/omatips/state.json
 ```
 
-The previous valid state is kept alongside it as `state.json.bak`. Before a new
-state is committed, the current primary becomes the backup and the new file is
-atomically moved into place. If the primary file cannot be read or is invalid
-during startup, OmaTips restores the backup and preserves the bad primary as a
-timestamped `state.json.corrupt.*` file. If neither copy is valid, storage is
-disabled instead of overwriting evidence that may still be recoverable.
-
-State files larger than 1 MiB are rejected without creating or overwriting
-either state file. OmaTips disables study-state updates and reports the error
-in the shell log so the oversized file can be inspected safely.
+The file is replaced atomically after each state update. Missing state starts a
+new course. Invalid, unsafe, or larger-than-1-MiB state is left untouched;
+OmaTips disables study-state updates and reports the error in the shell log so
+the file can be inspected safely.
 
 ## Develop and verify
 
@@ -102,7 +96,7 @@ omarchy plugin validate .
 qmllint -I /usr/share/omarchy/shell Service.qml BarWidget.qml Panel.qml
 QT_QPA_PLATFORM=offscreen QT_QPA_PLATFORMTHEME= /usr/lib/qt6/bin/qmltestrunner -input tests
 bash tests/validate_content.sh
-bash tests/test_state_io.sh
+bash tests/test_state_read.sh
 ```
 
 Changes under `~/.config/omarchy/plugins/` hot-reload. If needed, request a

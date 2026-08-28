@@ -12,11 +12,9 @@ Item {
   readonly property string stateHome: Quickshell.env("XDG_STATE_HOME") || (Quickshell.env("HOME") + "/.local/state")
   readonly property string stateDir: stateHome + "/omarchy/omatips"
   readonly property string statePath: stateDir + "/state.json"
-  readonly property string stateBackupPath: statePath + ".bak"
-  readonly property string statePendingPath: statePath + ".next"
   readonly property int maxStateBytes: TipModel.MAX_STATE_BYTES
   readonly property string tipsPath: manifest && manifest.__sourceDir ? manifest.__sourceDir + "/tips.json" : ""
-  readonly property string stateIoPath: manifest && manifest.__sourceDir ? manifest.__sourceDir + "/state_io.sh" : ""
+  readonly property string stateReadPath: manifest && manifest.__sourceDir ? manifest.__sourceDir + "/state_read.py" : ""
 
   property var tips: []
   property var studyState: TipModel.defaultState()
@@ -25,15 +23,10 @@ Item {
   property bool storageReady: false
   property bool tipsReady: false
   property bool initialized: false
-  property bool recoveringState: false
   property bool stateStorageBlocked: false
   property bool stateWriteInProgress: false
   property string queuedStateRaw: ""
-  property string queuedWriteMode: "commit"
   property string writingStateRaw: ""
-  property string writingMode: "commit"
-  property bool primaryStateInvalid: false
-  property string lastValidStateRaw: ""
   property bool actionBusy: false
 
   readonly property var lockService: shell && shell.firstPartyServiceFor
@@ -60,7 +53,7 @@ Item {
     stateReadProcess.running = true
   }
 
-  function persist(mode) {
+  function persist() {
     if (stateStorageBlocked) return false
     var serialized = JSON.stringify(studyState, null, 2) + "\n"
     if (!TipModel.stateSizeAllowed(TipModel.utf8ByteLength(serialized))) {
@@ -68,7 +61,6 @@ Item {
       return false
     }
     queuedStateRaw = serialized
-    queuedWriteMode = mode || "commit"
     beginStateWrite()
     return true
   }
@@ -77,13 +69,11 @@ Item {
     if (stateStorageBlocked || stateWriteInProgress || queuedStateRaw === "") return
     stateWriteInProgress = true
     writingStateRaw = queuedStateRaw
-    writingMode = queuedWriteMode
     queuedStateRaw = ""
-    statePendingFile.setText(writingStateRaw)
+    stateFile.setText(writingStateRaw)
   }
 
   function finishStateWrite() {
-    lastValidStateRaw = writingStateRaw
     writingStateRaw = ""
     stateWriteInProgress = false
     beginStateWrite()
@@ -93,40 +83,18 @@ Item {
     nowMs = Date.now()
     studyState = TipModel.parseState(raw, tips, nowMs)
     var serialized = JSON.stringify(studyState, null, 2) + "\n"
-    if (String(raw) !== serialized) {
-      lastValidStateRaw = String(raw)
-      persist("commit")
-    } else {
-      lastValidStateRaw = serialized
-    }
-    Qt.callLater(checkQueue)
-  }
-
-  function applyBackupState(raw) {
-    nowMs = Date.now()
-    studyState = TipModel.parseState(raw, tips, nowMs)
-    lastValidStateRaw = String(raw)
-    persist("restore")
+    if (String(raw) !== serialized) persist()
     Qt.callLater(checkQueue)
   }
 
   function startNewCourse() {
     nowMs = Date.now()
     studyState = TipModel.defaultState()
-    lastValidStateRaw = ""
     persist()
     Qt.callLater(checkQueue)
   }
 
-  function recoverStoredState() {
-    if (recoveringState) return
-    recoveringState = true
-    console.warn("OmaTips: primary state unavailable or invalid; trying backup")
-    stateBackupReadProcess.running = true
-  }
-
   function blockStateStorage(message) {
-    recoveringState = false
     stateStorageBlocked = true
     queuedStateRaw = ""
     console.error("OmaTips: " + message + "; state storage is disabled")
@@ -215,24 +183,20 @@ Item {
   }
 
   FileView {
-    id: statePendingFile
-    path: root.statePendingPath
+    id: stateFile
+    path: root.statePath
     atomicWrites: true
     preload: false
     blockAllReads: true
     printErrors: false
-    onSaved: {
-      stateCommitProcess.command = ["/usr/bin/bash", root.stateIoPath, root.writingMode,
-        root.statePendingPath, root.statePath, root.stateBackupPath,
-        String(root.maxStateBytes)]
-      stateCommitProcess.running = true
-    }
-    onSaveFailed: root.blockStateStorage("could not write pending state")
+    onSaved: root.finishStateWrite()
+    onSaveFailed: root.blockStateStorage("could not write state")
   }
 
   Process {
     id: stateReadProcess
-    command: ["/usr/bin/bash", root.stateIoPath, "read", root.statePath, String(root.maxStateBytes)]
+    command: ["/usr/bin/timeout", "2s", "/usr/bin/python3", root.stateReadPath,
+      root.statePath, String(root.maxStateBytes)]
     stdout: StdioCollector {
       id: stateReadOutput
       waitForEnd: true
@@ -240,58 +204,19 @@ Item {
     onExited: function(exitCode) {
       if (!root.initialized) return
       if (exitCode === 10) {
-        root.recoverStoredState()
-      } else if (exitCode !== 0) {
-        root.primaryStateInvalid = true
-        console.warn("OmaTips: primary state is not a readable regular file; trying backup")
-        root.recoverStoredState()
-      } else if (stateReadOutput.data === null || stateReadOutput.data === undefined) {
-        console.warn("OmaTips: primary state produced no readable data; trying backup")
-        root.recoverStoredState()
-      } else if (!TipModel.stateSizeAllowed(stateReadOutput.data.byteLength)) {
-        root.blockStateStorage("primary state exceeds the size limit")
-      } else if (TipModel.validStoredState(stateReadOutput.text)) {
-        root.applyPrimaryState(stateReadOutput.text)
-      } else {
-        root.primaryStateInvalid = true
-        root.recoverStoredState()
-      }
-    }
-  }
-
-  Process {
-    id: stateBackupReadProcess
-    command: ["/usr/bin/bash", root.stateIoPath, "read", root.stateBackupPath, String(root.maxStateBytes)]
-    stdout: StdioCollector {
-      id: stateBackupReadOutput
-      waitForEnd: true
-    }
-    onExited: function(exitCode) {
-      if (!root.recoveringState) return
-      root.recoveringState = false
-      if (exitCode === 10 && !root.primaryStateInvalid) {
         console.warn("OmaTips: no stored state; starting a new course")
         root.startNewCourse()
       } else if (exitCode !== 0) {
-        root.blockStateStorage("primary state is invalid and no readable backup is available")
-      } else if (stateBackupReadOutput.data === null || stateBackupReadOutput.data === undefined) {
-        root.blockStateStorage("backup state produced no readable data")
-      } else if (!TipModel.stateSizeAllowed(stateBackupReadOutput.data.byteLength)) {
-        root.blockStateStorage("backup state exceeds the size limit")
-      } else if (TipModel.validStoredState(stateBackupReadOutput.text)) {
-        console.warn("OmaTips: restored study progress from backup")
-        root.applyBackupState(stateBackupReadOutput.text)
+        root.blockStateStorage("state is not a readable regular file")
+      } else if (stateReadOutput.data === null || stateReadOutput.data === undefined) {
+        root.blockStateStorage("state produced no readable data")
+      } else if (!TipModel.stateSizeAllowed(stateReadOutput.data.byteLength)) {
+        root.blockStateStorage("state exceeds the size limit")
+      } else if (TipModel.validStoredState(stateReadOutput.text)) {
+        root.applyPrimaryState(stateReadOutput.text)
       } else {
-        root.blockStateStorage("primary and backup state are invalid")
+        root.blockStateStorage("state is invalid")
       }
-    }
-  }
-
-  Process {
-    id: stateCommitProcess
-    onExited: function(exitCode) {
-      if (exitCode === 0) root.finishStateWrite()
-      else root.blockStateStorage("state transaction failed with exit code " + exitCode)
     }
   }
 
