@@ -30,7 +30,7 @@ plugin code before enabling it.
 - Click the lightbulb in the bar to open the current card.
 - Grade it with `1` Again, `2` Hard, `3` Good, or `4` Easy.
 - Press Escape to close the panel.
-- Click the notification itself (or its **Study now** action) to open the same panel.
+- Click the notification to open the same panel, including from notification history.
 
 Due reviews always come before unseen cards. When no review is due, the next
 new shortcut is available immediately—there is no calendar-day study gate.

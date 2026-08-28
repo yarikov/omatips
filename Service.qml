@@ -146,13 +146,18 @@ Item {
   function sendNotification() {
     if (!currentTip || notificationProcess.running) return
     notificationProcess.command = [
-      "notify-send",
+      "omarchy-notification-send",
       "--app-name=OmaTips",
-      "--icon=dialog-information",
-      "--expire-time=12000",
-      "--action=default=Study now",
+      "--glyph=󰌵",
+      "--urgency=normal",
       "OmaTips",
-      "Time to study your cards."
+      "Time to study your cards.",
+      "--exec",
+      "omarchy-shell",
+      "shell",
+      "summon",
+      "yarikov.omatips",
+      "{}"
     ]
     notificationProcess.running = true
   }
@@ -253,16 +258,7 @@ Item {
     }
   }
 
-  Process {
-    id: notificationProcess
-    stdout: StdioCollector {
-      waitForEnd: true
-      onStreamFinished: {
-        if (TipModel.opensPluginForNotificationAction(text) && root.shell)
-          root.shell.summon("yarikov.omatips", "{}")
-      }
-    }
-  }
+  Process { id: notificationProcess }
 
   Process {
     id: actionProcess

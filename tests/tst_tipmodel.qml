@@ -289,12 +289,6 @@ TestCase {
     compare(legacy.length, 1)
   }
 
-  function test_notificationClickOpensPlugin() {
-    verify(TipModel.opensPluginForNotificationAction("default"))
-    verify(TipModel.opensPluginForNotificationAction("open\n"))
-    verify(!TipModel.opensPluginForNotificationAction(""))
-  }
-
   function test_positionLabelUsesCurrentCardNumber() {
     compare(TipModel.studyPositionLabel({ index: 26, isNew: true }, 60), "Tip 27 / 60")
     compare(TipModel.studyPositionLabel({ index: 26, isNew: false }, 60), "Review · Tip 27 / 60")

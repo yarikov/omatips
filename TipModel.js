@@ -27,11 +27,6 @@ function utf8ByteLength(value) {
   return bytes
 }
 
-function opensPluginForNotificationAction(value) {
-  var action = String(value || "").trim()
-  return action === "default" || action === "open"
-}
-
 function defaultState() {
   return {
     schemaVersion: SCHEMA_VERSION,
