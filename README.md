@@ -37,11 +37,16 @@ new shortcut is available immediately—there is no calendar-day study gate.
 The bar count includes only studied cards whose review time has arrived; an
 available new card is shown as a lightbulb without a number.
 
-OmaTips sends at most one study notification per local calendar day. When the
-queue is not empty, it appears at the first active, unlocked moment between
-08:00 and 16:00; notifications wait while the system is locked or idle. You can
-still introduce any number of new cards manually through the lightbulb. The
-notification is a short study reminder and does not reveal the next card.
+OmaTips treats 04:00 as the start of a new local study day. Each study day runs
+from 04:00 through 03:59 the following calendar day. If the queue is not empty,
+OmaTips may send one reminder between 08:00 and 16:00. It waits for the session
+to be active and unlocked, but never sends a late reminder after 16:00. For
+example, if you first start the computer at 17:00, no reminder is sent that day.
+
+Opening the study panel at any time marks the current study day as visited and
+cancels its reminder. You can still open the panel manually and introduce any
+number of new cards through the lightbulb. The notification itself is a short
+study reminder and does not reveal the next card.
 
 ## Scheduling
 

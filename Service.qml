@@ -109,15 +109,25 @@ Item {
     }
   }
 
+  function recordPanelOpened() {
+    if (!initialized || stateStorageBlocked) return
+    nowMs = Date.now()
+    var now = new Date(nowMs)
+    var studyDay = TipModel.studyDayKey(now)
+    if (!TipModel.shouldNotifyToday(studyState, studyDay)) return
+    studyState = stateWithNotification(studyDay)
+    persist()
+  }
+
   function checkQueue() {
     if (!initialized || !tipsReady || stateStorageBlocked) return
     nowMs = Date.now()
     var now = new Date(nowMs)
-    var today = TipModel.localDateKey(now)
+    var studyDay = TipModel.studyDayKey(now)
     if (!currentItem || !sessionActive || !TipModel.withinNotificationHours(now)
-        || !TipModel.shouldNotifyToday(studyState, today)
+        || !TipModel.shouldNotifyToday(studyState, studyDay)
         || nowMs < notificationSnoozedUntil || notificationProcess.running) return
-    studyState = stateWithNotification(today)
+    studyState = stateWithNotification(studyDay)
     persist()
     sendNotification()
   }

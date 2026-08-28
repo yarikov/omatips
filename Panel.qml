@@ -19,6 +19,7 @@ Panel {
 
   function openLatest() {
     if (!service || !service.hasStudyItem) return
+    service.recordPanelOpened()
     controller.show()
     Qt.callLater(function() { keyCatcher.forceActiveFocus() })
   }

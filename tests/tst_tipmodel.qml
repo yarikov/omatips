@@ -137,7 +137,7 @@ TestCase {
     compare(state.lastNotificationDate, "")
   }
 
-  function test_notificationIsLimitedToOncePerLocalDay() {
+  function test_notificationIsLimitedToOncePerStudyDay() {
     var state = TipModel.defaultState()
     verify(TipModel.shouldNotifyToday(state, "2026-08-25"))
     state.lastNotificationDate = "2026-08-25"
@@ -147,6 +147,13 @@ TestCase {
 
   function test_localDateKey() {
     compare(TipModel.localDateKey(new Date(2026, 7, 25, 23, 45)), "2026-08-25")
+  }
+
+  function test_studyDayStartsAtFour() {
+    compare(TipModel.studyDayKey(new Date(2026, 7, 25, 3, 59)), "2026-08-24")
+    compare(TipModel.studyDayKey(new Date(2026, 7, 25, 4, 0)), "2026-08-25")
+    compare(TipModel.studyDayKey(new Date(2026, 7, 25, 23, 59)), "2026-08-25")
+    compare(TipModel.studyDayKey(new Date(2026, 7, 26, 3, 59)), "2026-08-25")
   }
 
   function test_notificationHoursRunFromEightUntilSixteen() {

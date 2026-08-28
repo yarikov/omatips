@@ -263,6 +263,11 @@ function localDateKey(date) {
   return year + "-" + month + "-" + day
 }
 
+function studyDayKey(date) {
+  if (date.getHours() >= 4) return localDateKey(date)
+  return localDateKey(new Date(date.getFullYear(), date.getMonth(), date.getDate() - 1))
+}
+
 function shouldNotifyToday(state, today) {
   return String((state && state.lastNotificationDate) || "") !== String(today || "")
 }
