@@ -173,7 +173,7 @@ Panel {
           }
 
           Row {
-            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width
             spacing: Style.space(6)
 
             Repeater {
@@ -186,6 +186,7 @@ Panel {
 
               Button {
                 required property var modelData
+                width: (content.width - 3 * Style.space(6)) / 4
                 text: modelData.label + "  " + root.ratingIntervalLabel(modelData.rating)
                 foreground: root.bar ? root.bar.foreground : Color.foreground
                 accent: Color.accent
