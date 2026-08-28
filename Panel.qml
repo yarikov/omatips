@@ -206,8 +206,8 @@ Panel {
           Text {
             width: parent.width
             text: root.actionLabel() !== ""
-              ? "1–4 grade · Enter runs the safe action · Esc closes"
-              : "1–4 grade · Esc closes"
+              ? "Press 1–4 to rate · Enter to run action · Esc to close"
+              : "Press 1–4 to rate · Esc to close"
             color: Qt.darker(root.bar ? root.bar.foreground : Color.foreground, 1.55)
             font.family: root.bar ? root.bar.fontFamily : Style.font.family
             font.pixelSize: Style.font.caption
