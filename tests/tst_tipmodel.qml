@@ -105,6 +105,31 @@ TestCase {
     verify(third.card.completed)
     compare(TipModel.currentDue(third.state, singleTip, third.card.dueAt), null)
     compare(TipModel.nextDueAt(third.state, singleTip, third.card.dueAt), -1)
+    verify(TipModel.courseCompleted(third.state, singleTip, third.card.dueAt))
+  }
+
+  function test_courseIsNotCompleteWithUnseenCards() {
+    verify(!TipModel.courseCompleted(TipModel.defaultState(), tips, 1000))
+  }
+
+  function test_courseIsNotCompleteWithFutureReviews() {
+    var state = TipModel.defaultState()
+    state.nextNewIndex = tips.length
+    state.cards.one = {
+      dueAt: 2000, intervalMinutes: 10, ease: 2.5,
+      repetitions: 1, lapses: 0, easyStreak: 0, completed: false
+    }
+    verify(!TipModel.courseCompleted(state, tips, 1000))
+  }
+
+  function test_compactCompletedStateCountsAsComplete() {
+    var state = TipModel.defaultState()
+    state.nextNewIndex = tips.length
+    state.cards.three = {
+      dueAt: 1000, intervalMinutes: 10, ease: 2.8,
+      repetitions: 3, lapses: 0, easyStreak: 3, completed: true
+    }
+    verify(TipModel.courseCompleted(state, tips, 1000))
   }
 
   function test_nonEasyRatingResetsEasyStreak() {

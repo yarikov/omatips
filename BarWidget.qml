@@ -38,7 +38,7 @@ BarWidget {
 
   readonly property bool popoutSwitchClosing: panelLoader.item ? panelLoader.item.popoutSwitchClosing === true : false
 
-  visible: tipService && tipService.hasStudyItem
+  visible: tipService && (tipService.hasStudyItem || tipService.courseCompleted)
   implicitWidth: visible ? button.implicitWidth : 0
   implicitHeight: visible ? button.implicitHeight : 0
 
@@ -65,7 +65,9 @@ BarWidget {
       ? "󰌵"
       : "󰌵 " + root.tipService.dueReviewCount
     tooltipText: !root.tipService ? "OmaTips"
-      : root.tipService.dueReviewCount > 0
+      : root.tipService.courseCompleted
+        ? "OmaTips · Omarchy Hero"
+        : root.tipService.dueReviewCount > 0
         ? "OmaTips · " + root.tipService.dueReviewCount + " reviews due"
         : "OmaTips · New tip available"
     fontSize: root.vertical ? Style.font.icon : Style.font.body

@@ -28,6 +28,8 @@ Item {
   property string queuedStateRaw: ""
   property string writingStateRaw: ""
   property bool actionBusy: false
+  property bool removalBusy: false
+  property string removalError: ""
 
   readonly property var lockService: shell && shell.firstPartyServiceFor
     ? shell.firstPartyServiceFor("omarchy.lock") : null
@@ -45,6 +47,8 @@ Item {
   readonly property var currentTip: currentItem ? currentItem.tip : null
   readonly property bool hasStudyItem: currentItem !== null
   readonly property double nextDueAt: TipModel.nextDueAt(studyState, tips, nowMs)
+  readonly property bool courseCompleted: initialized && tipsReady
+    && TipModel.courseCompleted(studyState, tips, nowMs)
   readonly property string nextDueLabel: nextDueAt < 0 ? "No reviews scheduled" : TipModel.formatWait(Math.max(0, nextDueAt - nowMs))
 
   function maybeInitialize() {
@@ -92,6 +96,26 @@ Item {
     studyState = TipModel.defaultState()
     persist()
     Qt.callLater(checkQueue)
+  }
+
+  function restartCourse() {
+    if (!initialized || stateStorageBlocked || removalBusy) return false
+    nowMs = Date.now()
+    var next = TipModel.defaultState()
+    next.lastNotificationDate = TipModel.studyDayKey(new Date(nowMs))
+    studyState = next
+    notificationSnoozedUntil = nowMs + 5 * 60 * 1000
+    removalError = ""
+    persist()
+    return true
+  }
+
+  function removePlugin() {
+    if (!initialized || removalBusy) return false
+    removalBusy = true
+    removalError = ""
+    stateDeleteProcess.running = true
+    return true
   }
 
   function blockStateStorage(message) {
@@ -263,6 +287,24 @@ Item {
   Process {
     id: actionProcess
     onExited: function() { root.actionBusy = false }
+  }
+
+  Process {
+    id: stateDeleteProcess
+    command: ["/usr/bin/rm", "-f", "--", root.statePath]
+    onExited: function(exitCode) {
+      if (exitCode !== 0) {
+        root.removalBusy = false
+        root.removalError = "Could not delete course progress. OmaTips was not uninstalled."
+        return
+      }
+      pluginRemoveProcess.startDetached()
+    }
+  }
+
+  Process {
+    id: pluginRemoveProcess
+    command: ["/usr/bin/omarchy", "plugin", "remove", "yarikov.omatips", "--yes"]
   }
 
   Component.onCompleted: storageInit.running = true

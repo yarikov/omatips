@@ -155,6 +155,13 @@ function nextDueAt(state, tips, now) {
   return earliest
 }
 
+function courseCompleted(state, tips, now) {
+  if (!Array.isArray(tips) || tips.length === 0) return false
+  var normalized = normalizedState(state, tips, now)
+  return normalized.nextNewIndex >= tips.length
+    && nextDueAt(normalized, tips, now) < 0
+}
+
 function scheduledCard(previous, rating, now) {
   var old = normalizedCard(previous) || {
     dueAt: now,

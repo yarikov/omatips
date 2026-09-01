@@ -28,6 +28,8 @@ plugin code before enabling it.
 ## Use
 
 - Click the lightbulb in the bar to open the current card.
+- Use `H/J/K/L` or the arrow keys to select any button, then press Enter to
+  activate it.
 - Grade it with `1` Again, `2` Hard, `3` Good, or `4` Easy.
 - Press Escape to close the panel.
 - Click the notification to open the same panel, including from notification history.
@@ -75,6 +77,14 @@ may represent 27 days and several additional hours.
 When every introduced card is scheduled for later, OmaTips stays out of sight
 until the next review becomes due.
 
+After the final card is completed, OmaTips keeps its lightbulb in the bar and
+welcomes you as an **Omarchy Hero** and **Omarchy Hotkey Master**. Closing the
+panel leaves the icon available so the completion screen can be reopened at
+any time. From there, you can start the course again or uninstall OmaTips.
+Both actions ask for confirmation because starting again erases the current
+progress, while uninstalling from the completion screen removes both the
+plugin and its saved course state.
+
 ## Privacy and safety
 
 The hotkey course is instructional data: studying a card does not execute its
@@ -116,6 +126,7 @@ rm -f "${XDG_STATE_HOME:-$HOME/.local/state}/omarchy/omatips/state.json"
 
 The first command removes the plugin. The second deletes all saved study
 progress; omit it if you want a future reinstall to resume the schedule.
+The completion screen's **Uninstall OmaTips** button performs both operations.
 
 ## License
 
