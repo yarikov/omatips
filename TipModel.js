@@ -32,8 +32,21 @@ function defaultState() {
     schemaVersion: SCHEMA_VERSION,
     nextNewIndex: 0,
     cards: Object.create(null),
-    lastNotificationDate: ""
+    lastNotificationDate: "",
+    panelSession: {
+      tipId: "", answerRevealed: false, cursorTarget: "",
+      preferredRating: "again", confirmationAction: "", confirmationOrigin: ""
+    }
   }
+}
+
+function validPanelTarget(target) {
+  return ["showAnswer", "action", "again", "hard", "good", "easy",
+          "restart", "uninstall", "cancel", "confirm"].indexOf(target) !== -1
+}
+
+function validRating(rating) {
+  return ["again", "hard", "good", "easy"].indexOf(rating) !== -1
 }
 
 function finiteNumber(value, fallback) {
@@ -66,6 +79,23 @@ function normalizedState(value, tips, now) {
 
   var known = Object.create(null)
   for (var i = 0; i < tips.length; i++) known[tips[i].id] = true
+  var panel = value.panelSession
+  if (panel && typeof panel === "object" && !Array.isArray(panel)) {
+    var panelTipId = String(panel.tipId || "")
+    var panelTarget = String(panel.cursorTarget || "")
+    if (panelTipId === "" || Object.prototype.hasOwnProperty.call(known, panelTipId)) {
+      next.panelSession.tipId = panelTipId
+      next.panelSession.answerRevealed = panelTipId !== "" && panel.answerRevealed === true
+      next.panelSession.cursorTarget = validPanelTarget(panelTarget) ? panelTarget : ""
+      var preferred = String(panel.preferredRating || "")
+      next.panelSession.preferredRating = validRating(preferred) ? preferred : "again"
+      var confirmation = String(panel.confirmationAction || "")
+      next.panelSession.confirmationAction = ["restart", "uninstall"].indexOf(confirmation) !== -1
+        ? confirmation : ""
+      var origin = String(panel.confirmationOrigin || "")
+      next.panelSession.confirmationOrigin = validPanelTarget(origin) ? origin : ""
+    }
+  }
   var cards = value.cards && typeof value.cards === "object" ? value.cards : {}
   for (var id in cards) {
     if (!Object.prototype.hasOwnProperty.call(cards, id)
@@ -123,6 +153,44 @@ function studyQueue(state, tips, now) {
   if (reviews.length > 0) return reviews
   var unseen = nextNew(state, tips, now)
   return unseen ? [unseen] : []
+}
+
+function selectedStudyItem(queue, unseen, activeTipId) {
+  var id = String(activeTipId || "")
+  if (id !== "") {
+    for (var i = 0; i < queue.length; i++) {
+      if (queue[i].tip && queue[i].tip.id === id) return queue[i]
+    }
+    if (unseen && unseen.tip && unseen.tip.id === id) return unseen
+  }
+  return queue.length > 0 ? queue[0] : null
+}
+
+function withPanelSession(input, tips, tipId, answerRevealed, cursorTarget,
+                          preferredRating, confirmationAction, confirmationOrigin, now) {
+  var state = normalizedState(input, tips, now)
+  var id = String(tipId || "")
+  var target = String(cursorTarget || "")
+  var preferred = String(preferredRating || "")
+  var confirmation = String(confirmationAction || "")
+  var origin = String(confirmationOrigin || "")
+  var known = id === ""
+  for (var i = 0; i < tips.length; i++) {
+    if (tips[i].id === id) {
+      known = true
+      break
+    }
+  }
+  state.panelSession = {
+    tipId: known ? id : "",
+    answerRevealed: known && id !== "" && answerRevealed === true,
+    cursorTarget: known && validPanelTarget(target) ? target : "",
+    preferredRating: known && validRating(preferred) ? preferred : "again",
+    confirmationAction: known
+      && ["restart", "uninstall"].indexOf(confirmation) !== -1 ? confirmation : "",
+    confirmationOrigin: known && validPanelTarget(origin) ? origin : ""
+  }
+  return state
 }
 
 // Kept as the combined study queue API for existing callers.
@@ -243,8 +311,20 @@ function ratingIntervalLabel(previous, rating, now) {
 
 function review(input, tips, tipId, rating, now) {
   var state = normalizedState(input, tips, now)
-  var item = currentDue(state, tips, now)
-  if (!item || item.tip.id !== tipId) return { state: state, reviewed: false }
+  var item = null
+  for (var i = 0; i < tips.length; i++) {
+    if (tips[i].id !== tipId) continue
+    if (i === state.nextNewIndex) {
+      item = { tip: tips[i], index: i, isNew: true, card: null, dueAt: now }
+    } else if (i < state.nextNewIndex) {
+      var storedCard = state.cards[tipId]
+      if (storedCard && !storedCard.completed && storedCard.dueAt <= now)
+        item = { tip: tips[i], index: i, isNew: false,
+          card: storedCard, dueAt: storedCard.dueAt }
+    }
+    break
+  }
+  if (!item) return { state: state, reviewed: false }
   var card = scheduledCard(item.card, rating, now)
   if (!card) return { state: state, reviewed: false }
 
@@ -255,6 +335,7 @@ function review(input, tips, tipId, rating, now) {
   cards[tipId] = card
   state.cards = cards
   if (item.isNew) state.nextNewIndex = Math.min(tips.length, state.nextNewIndex + 1)
+  state.panelSession = defaultState().panelSession
   return { state: state, reviewed: true, card: card }
 }
 

@@ -43,7 +43,13 @@ Item {
   readonly property int dueReviewCount: dueReviews.length
   readonly property var nextNewItem: TipModel.nextNew(studyState, tips, nowMs)
   readonly property var studyItems: TipModel.studyQueue(studyState, tips, nowMs)
-  readonly property var currentItem: studyItems.length > 0 ? studyItems[0] : null
+  readonly property var panelSession: studyState.panelSession || ({
+    tipId: "", answerRevealed: false, cursorTarget: "",
+    preferredRating: "again", confirmationAction: "", confirmationOrigin: ""
+  })
+  readonly property string activeTipId: String(panelSession.tipId || "")
+  readonly property var currentItem: TipModel.selectedStudyItem(
+    studyItems, nextNewItem, activeTipId)
   readonly property var currentTip: currentItem ? currentItem.tip : null
   readonly property bool hasStudyItem: currentItem !== null
   readonly property double nextDueAt: TipModel.nextDueAt(studyState, tips, nowMs)
@@ -129,12 +135,31 @@ Item {
       schemaVersion: studyState.schemaVersion,
       nextNewIndex: studyState.nextNewIndex,
       cards: studyState.cards,
-      lastNotificationDate: notificationDate
+      lastNotificationDate: notificationDate,
+      panelSession: studyState.panelSession
     }
   }
 
-  function recordPanelOpened() {
+  function savePanelSession(tipId, answerRevealed, cursorTarget,
+                            preferredRating, confirmationAction, confirmationOrigin) {
+    if (!initialized || stateStorageBlocked) return false
+    studyState = TipModel.withPanelSession(studyState, tips, tipId,
+      answerRevealed, cursorTarget, preferredRating,
+      confirmationAction, confirmationOrigin, nowMs)
+    return persist()
+  }
+
+  function recordPanelOpened(openedTipId) {
     if (!initialized || stateStorageBlocked) return
+    var tipId = String(openedTipId || "")
+    if (tipId === "" && currentTip) tipId = currentTip.id
+    var previous = panelSession
+    savePanelSession(tipId,
+      previous.tipId === tipId && previous.answerRevealed === true,
+      previous.tipId === tipId ? previous.cursorTarget : "showAnswer",
+      previous.tipId === tipId ? previous.preferredRating : "again",
+      previous.tipId === tipId ? previous.confirmationAction : "",
+      previous.tipId === tipId ? previous.confirmationOrigin : "")
     nowMs = Date.now()
     var now = new Date(nowMs)
     var studyDay = TipModel.studyDayKey(now)

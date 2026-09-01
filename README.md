@@ -30,6 +30,9 @@ plugin code before enabling it.
 - Click the lightbulb in the bar to open the current card.
 - Use `H/J/K/L` or the arrow keys to select any button, then press Enter to
   activate it.
+- Recall the shortcut, then choose **Show answer** or press Enter/Space to
+  reveal it before grading. Reopening the same card restores its reveal and
+  selected-button state, including after a shell reload, until the card is graded.
 - Grade it with `1` Again, `2` Hard, `3` Good, or `4` Easy.
 - Press Escape to close the panel.
 - Click the notification to open the same panel, including from notification history.

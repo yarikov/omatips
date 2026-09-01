@@ -41,6 +41,51 @@ TestCase {
     compare(TipModel.dueReviews(state, tips, 1000 + 60000).length, 1)
   }
 
+  function test_activeNewCardStaysSelectedWhenReviewBecomesDue() {
+    var state = TipModel.review(TipModel.defaultState(), tips, "one", "again", 1000).state
+    var newItem = TipModel.nextNew(state, tips, 1000 + 30000)
+    compare(newItem.tip.id, "two")
+
+    var dueQueue = TipModel.studyQueue(state, tips, 1000 + 60000)
+    compare(dueQueue[0].tip.id, "one")
+    compare(TipModel.selectedStudyItem(dueQueue, newItem, "two").tip.id, "two")
+    compare(TipModel.selectedStudyItem(dueQueue, newItem, "").tip.id, "one")
+
+    var revealed = TipModel.withPanelSession(state, tips, "two", true, "good",
+      "easy", "", "", 1000 + 60000)
+    compare(revealed.panelSession.tipId, "two")
+    verify(revealed.panelSession.answerRevealed)
+    compare(revealed.panelSession.cursorTarget, "good")
+    compare(revealed.panelSession.preferredRating, "easy")
+
+    var result = TipModel.review(revealed, tips, "two", "good", 1000 + 60000)
+    verify(result.reviewed)
+    compare(result.state.nextNewIndex, 2)
+    compare(result.state.panelSession.tipId, "")
+  }
+
+  function test_panelSessionIsOptionalAndSanitized() {
+    var oldState = {
+      schemaVersion: 1, nextNewIndex: 0, cards: {}, lastNotificationDate: ""
+    }
+    var parsedOldState = TipModel.parseState(JSON.stringify(oldState), tips, 1000)
+    compare(parsedOldState.panelSession.tipId, "")
+    verify(!parsedOldState.panelSession.answerRevealed)
+
+    var invalid = TipModel.withPanelSession(parsedOldState, tips, "missing", true,
+      "arbitrary", "invalid", "delete-everything", "arbitrary", 1000)
+    compare(invalid.panelSession.tipId, "")
+    verify(!invalid.panelSession.answerRevealed)
+    compare(invalid.panelSession.cursorTarget, "")
+
+    var confirmation = TipModel.withPanelSession(parsedOldState, tips, "", false,
+      "confirm", "again", "uninstall", "uninstall", 1000)
+    compare(confirmation.panelSession.tipId, "")
+    verify(!confirmation.panelSession.answerRevealed)
+    compare(confirmation.panelSession.confirmationAction, "uninstall")
+    compare(confirmation.panelSession.cursorTarget, "confirm")
+  }
+
   function test_intervalsMatchRatings() {
     compare(TipModel.scheduledCard(null, "again", 0).intervalMinutes, 1)
     compare(TipModel.scheduledCard(null, "hard", 0).intervalMinutes, 10)

@@ -16,9 +16,12 @@ Panel {
   property string confirmationAction: ""
   property string confirmationOrigin: ""
   property string cursorTarget: ""
+  property bool answerRevealed: false
+  property string preferredRating: "again"
 
   readonly property var studyItem: service ? service.currentItem : null
   readonly property var tip: studyItem ? studyItem.tip : null
+  readonly property string currentTipId: tip && tip.id ? String(tip.id) : ""
   readonly property var barIdentity: hostWidget || root
   readonly property bool courseCompleted: !!(service && service.courseCompleted)
   readonly property bool confirmationOpen: confirmationAction !== ""
@@ -26,27 +29,27 @@ Panel {
     ? [["cancel", "confirm"]]
     : courseCompleted
       ? [["restart", "uninstall"]]
-      : actionLabel() !== ""
-        ? [["action"], ["again", "hard", "good", "easy"]]
-        : [["again", "hard", "good", "easy"]]
+      : !answerRevealed
+        ? [["showAnswer"]]
+        : actionLabel() !== ""
+          ? [["action"], ["again", "hard", "good", "easy"]]
+          : [["again", "hard", "good", "easy"]]
 
   function openLatest() {
     if (!service || (!service.hasStudyItem && !service.courseCompleted)) return
-    if (service.hasStudyItem) service.recordPanelOpened()
-    resetCursor()
+    if (service.hasStudyItem) service.recordPanelOpened(currentTipId)
+    if (!Navigation.contains(navigationRows, cursorTarget)) resetCursor()
     controller.show()
     Qt.callLater(function() { keyCatcher.forceActiveFocus() })
   }
 
   function open() { openLatest() }
   function close() {
-    confirmationAction = ""
-    confirmationOrigin = ""
-    cursorTarget = ""
     controller.hide()
   }
   function grade(rating) {
-    if (!service) return
+    if (!service || !answerRevealed) return
+    preferredRating = rating
     setCursor(rating)
     service.reviewCurrent(rating)
   }
@@ -67,12 +70,14 @@ Panel {
     confirmationOrigin = cursorTarget
     confirmationAction = action
     cursorTarget = "confirm"
+    persistPanelSession()
   }
   function cancelConfirmation() {
     confirmationAction = ""
     cursorTarget = Navigation.contains(navigationRows, confirmationOrigin)
       ? confirmationOrigin : Navigation.first(navigationRows)
     confirmationOrigin = ""
+    persistPanelSession()
     Qt.callLater(function() { keyCatcher.forceActiveFocus() })
   }
   function confirmSelection() {
@@ -80,21 +85,61 @@ Panel {
     confirmationAction = ""
     confirmationOrigin = ""
     if (!service) return
-    if (action === "restart") service.restartCourse()
+    if (action === "restart") {
+      preferredRating = "again"
+      answerRevealed = false
+      service.restartCourse()
+    }
     else if (action === "uninstall") service.removePlugin()
+  }
+  function revealAnswer() {
+    if (!service || !service.hasStudyItem || answerRevealed) return
+    answerRevealed = true
+    cursorTarget = Navigation.contains(navigationRows, preferredRating)
+      ? preferredRating : "again"
+    persistPanelSession()
+  }
+  function persistPanelSession() {
+    if (service && (currentTipId !== "" || courseCompleted))
+      service.savePanelSession(currentTipId, answerRevealed, cursorTarget,
+        preferredRating, confirmationAction, confirmationOrigin)
+  }
+  function restorePanelSession() {
+    var session = service ? service.panelSession : null
+    if (session && session.tipId === currentTipId
+        && (currentTipId !== "" || courseCompleted)) {
+      answerRevealed = session.answerRevealed === true
+      preferredRating = ["again", "hard", "good", "easy"].indexOf(
+        session.preferredRating) !== -1 ? session.preferredRating : "again"
+      confirmationAction = session.confirmationAction || ""
+      confirmationOrigin = session.confirmationOrigin || ""
+      cursorTarget = Navigation.contains(navigationRows, session.cursorTarget)
+        ? session.cursorTarget : Navigation.first(navigationRows)
+    } else {
+      answerRevealed = false
+      preferredRating = "again"
+      confirmationAction = ""
+      confirmationOrigin = ""
+      resetCursor()
+    }
   }
   function resetCursor() {
     cursorTarget = Navigation.first(navigationRows)
   }
   function setCursor(target) {
-    if (Navigation.contains(navigationRows, target)) cursorTarget = target
+    if (Navigation.contains(navigationRows, target)) {
+      cursorTarget = target
+      persistPanelSession()
+    }
   }
   function moveCursor(dx, dy) {
     cursorTarget = Navigation.move(navigationRows, cursorTarget, dx, dy)
+    persistPanelSession()
   }
   function activateCurrent() {
     if (!Navigation.contains(navigationRows, cursorTarget)) resetCursor()
-    if (cursorTarget === "action") runAction()
+    if (cursorTarget === "showAnswer") revealAnswer()
+    else if (cursorTarget === "action") runAction()
     else if (["again", "hard", "good", "easy"].indexOf(cursorTarget) !== -1)
       grade(cursorTarget)
     else if (cursorTarget === "restart") requestConfirmation("restart")
@@ -103,16 +148,25 @@ Panel {
     else if (cursorTarget === "confirm") confirmSelection()
   }
 
+  onCurrentTipIdChanged: {
+    confirmationAction = ""
+    confirmationOrigin = ""
+    Qt.callLater(restorePanelSession)
+  }
+
   Connections {
     target: root.service
     function onCurrentItemChanged() {
       Qt.callLater(function() {
-        if (!Navigation.contains(root.navigationRows, root.cursorTarget)) root.resetCursor()
         if (root.opened && (!root.service
             || (!root.service.hasStudyItem && !root.service.courseCompleted))) root.close()
       })
     }
-    function onCourseCompletedChanged() { Qt.callLater(root.resetCursor) }
+    function onCourseCompletedChanged() {
+      root.answerRevealed = false
+      Qt.callLater(root.restorePanelSession)
+    }
+    function onPanelSessionChanged() { Qt.callLater(root.restorePanelSession) }
   }
 
   KeyboardPanel {
@@ -141,7 +195,7 @@ Panel {
           root.bar.switchPanelFrom(root.barIdentity, direction)
       }
       onTextKey: function(text) {
-        if (root.confirmationOpen || root.courseCompleted) return
+        if (root.confirmationOpen || root.courseCompleted || !root.answerRevealed) return
         if (text === "1") root.grade("again")
         else if (text === "2") root.grade("hard")
         else if (text === "3") root.grade("good")
@@ -208,10 +262,25 @@ Panel {
               wrapMode: Text.WordWrap
             }
 
+            Button {
+              width: parent.width
+              visible: !root.answerRevealed
+              text: "Show answer"
+              foreground: root.bar ? root.bar.foreground : Color.foreground
+              accent: Color.accent
+              bordered: true
+              hasCursor: root.cursorTarget === "showAnswer"
+              onHovered: function(isHovered) {
+                if (isHovered) root.setCursor("showAnswer")
+              }
+              onClicked: root.revealAnswer()
+            }
+
             BorderSurface {
               width: parent.width
               implicitHeight: exampleText.implicitHeight + Style.space(20)
-              visible: !!(root.tip && (root.tip.shortcut || root.tip.command))
+              visible: root.answerRevealed
+                && !!(root.tip && (root.tip.shortcut || root.tip.command))
               color: Style.normalFillFor(root.bar ? root.bar.foreground : Color.foreground, Color.accent)
               borderSpec: Border.controlSpec("normal", root.bar ? root.bar.foreground : Color.foreground, Color.accent)
               radius: Style.cornerRadius
@@ -231,7 +300,7 @@ Panel {
             }
 
             Button {
-              visible: root.actionLabel() !== ""
+              visible: root.answerRevealed && root.actionLabel() !== ""
               text: root.actionLabel()
               foreground: root.bar ? root.bar.foreground : Color.foreground
               bordered: true
@@ -245,6 +314,7 @@ Panel {
 
             Text {
               width: parent.width
+              visible: root.answerRevealed
               text: "How well did you remember this?"
               color: root.bar ? root.bar.foreground : Color.foreground
               font.family: root.bar ? root.bar.fontFamily : Style.font.family
@@ -256,6 +326,7 @@ Panel {
             Row {
               width: parent.width
               spacing: Style.space(6)
+              visible: root.answerRevealed
 
               Repeater {
                 model: [
@@ -283,7 +354,7 @@ Panel {
 
             Text {
               width: parent.width
-              text: "Press 1–4 to rate · Esc to close"
+              text: root.answerRevealed ? "Press 1–4 to rate · Esc to close" : "Esc to close"
               color: Qt.darker(root.bar ? root.bar.foreground : Color.foreground, 1.55)
               font.family: root.bar ? root.bar.fontFamily : Style.font.family
               font.pixelSize: Style.font.caption

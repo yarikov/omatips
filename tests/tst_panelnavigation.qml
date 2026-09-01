@@ -6,6 +6,7 @@ TestCase {
   name: "PanelNavigation"
 
   readonly property var ratings: [["again", "hard", "good", "easy"]]
+  readonly property var hiddenAnswer: [["showAnswer"]]
   readonly property var lessonWithAction: [["action"], ["again", "hard", "good", "easy"]]
   readonly property var twoButtons: [["cancel", "confirm"]]
 
@@ -18,6 +19,12 @@ TestCase {
     compare(Navigation.move(ratings, "again", -1, 0), "again")
     compare(Navigation.move(ratings, "again", 1, 0), "hard")
     compare(Navigation.move(ratings, "easy", 1, 0), "easy")
+  }
+
+  function test_hiddenAnswerKeepsCursorOnRevealButton() {
+    compare(Navigation.first(hiddenAnswer), "showAnswer")
+    compare(Navigation.move(hiddenAnswer, "showAnswer", -1, 0), "showAnswer")
+    compare(Navigation.move(hiddenAnswer, "showAnswer", 0, 1), "showAnswer")
   }
 
   function test_verticalMovementUsesNearestAvailableColumn() {
