@@ -100,10 +100,11 @@ Course state is stored at:
 ${XDG_STATE_HOME:-~/.local/state}/omarchy/omatips/state.json
 ```
 
-The file is replaced atomically after each state update. Missing state starts a
-new course. Invalid, unsafe, or larger-than-1-MiB state is left untouched;
-OmaTips disables study-state updates and reports the error in the shell log so
-the file can be inspected safely.
+The file is replaced atomically after each state update. Missing primary state
+is restored from the most recent valid backup, or starts a new course when no
+backup exists. Invalid, unsafe, or larger-than-64-KiB state is left untouched;
+OmaTips disables study-state updates when neither copy can be loaded and
+reports the error in the shell log.
 
 ## Develop and verify
 

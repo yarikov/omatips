@@ -202,6 +202,7 @@ TestCase {
   function test_initialStateUsesCurrentSchemaVersion() {
     var state = TipModel.defaultState()
     compare(state.schemaVersion, 1)
+    compare(state.storageRevision, 0)
     compare(state.nextNewIndex, 0)
     compare(Object.keys(state.cards).length, 0)
     compare(state.lastNotificationDate, "")
@@ -293,14 +294,16 @@ TestCase {
     }
     state.lastNotificationDate = "2026-08-27"
 
-    var serialized = JSON.stringify(state, null, 2) + "\n"
-    verify(serialized.length < TipModel.MAX_STATE_BYTES / 10)
-    verify(TipModel.stateSizeAllowed(serialized.length))
+    var serialized = JSON.stringify(state) + "\n"
+    var byteLength = TipModel.utf8ByteLength(serialized)
+    verify(TipModel.stateSizeAllowed(byteLength))
+    verify(Math.ceil(byteLength / 3) * 4 < 128 * 1024)
   }
 
   function test_currentSchemaStatePreservesProgress() {
     var storedState = {
       schemaVersion: 1,
+      storageRevision: 7,
       nextNewIndex: 1,
       cards: {
         one: { dueAt: 1000, intervalMinutes: 10, ease: 2.5, repetitions: 1, lapses: 0 }
@@ -309,6 +312,7 @@ TestCase {
     }
     var parsed = TipModel.parseState(JSON.stringify(storedState), tips, 1000)
     compare(parsed.schemaVersion, 1)
+    compare(parsed.storageRevision, 7)
     compare(parsed.nextNewIndex, 1)
     compare(parsed.cards.one.dueAt, 1000)
     compare(parsed.lastNotificationDate, "2026-08-25")

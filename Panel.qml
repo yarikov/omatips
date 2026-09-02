@@ -50,7 +50,7 @@ Panel {
   function grade(rating) {
     if (!service || !answerRevealed) return
     preferredRating = rating
-    setCursor(rating)
+    cursorTarget = rating
     service.reviewCurrent(rating)
   }
   function ratingIntervalLabel(rating) {
@@ -123,6 +123,15 @@ Panel {
       resetCursor()
     }
   }
+  function schedulePanelSessionRestore() {
+    restoreSessionTimer.restart()
+  }
+
+  Timer {
+    id: restoreSessionTimer
+    interval: 0
+    onTriggered: root.restorePanelSession()
+  }
   function resetCursor() {
     cursorTarget = Navigation.first(navigationRows)
   }
@@ -151,7 +160,7 @@ Panel {
   onCurrentTipIdChanged: {
     confirmationAction = ""
     confirmationOrigin = ""
-    Qt.callLater(restorePanelSession)
+    restoreSessionTimer.restart()
   }
 
   Connections {
@@ -164,9 +173,9 @@ Panel {
     }
     function onCourseCompletedChanged() {
       root.answerRevealed = false
-      Qt.callLater(root.restorePanelSession)
+      root.schedulePanelSessionRestore()
     }
-    function onPanelSessionChanged() { Qt.callLater(root.restorePanelSession) }
+    function onPanelSessionChanged() { root.schedulePanelSessionRestore() }
   }
 
   KeyboardPanel {

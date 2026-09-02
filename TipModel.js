@@ -2,7 +2,7 @@
 
 var SCHEMA_VERSION = 1
 var MINUTE_MS = 60 * 1000
-var MAX_STATE_BYTES = 1024 * 1024
+var MAX_STATE_BYTES = 64 * 1024
 
 function stateSizeAllowed(byteLength) {
   var length = Number(byteLength)
@@ -30,6 +30,7 @@ function utf8ByteLength(value) {
 function defaultState() {
   return {
     schemaVersion: SCHEMA_VERSION,
+    storageRevision: 0,
     nextNewIndex: 0,
     cards: Object.create(null),
     lastNotificationDate: "",
@@ -72,6 +73,7 @@ function normalizedState(value, tips, now) {
   if (value.schemaVersion !== SCHEMA_VERSION) return defaultState()
 
   var next = defaultState()
+  next.storageRevision = Math.max(0, Math.floor(finiteNumber(value.storageRevision, 0)))
   next.nextNewIndex = Math.max(0, Math.floor(finiteNumber(value.nextNewIndex, 0)))
   next.nextNewIndex = Math.min(next.nextNewIndex, tips.length)
   next.lastNotificationDate = /^\d{4}-\d{2}-\d{2}$/.test(String(value.lastNotificationDate || ""))

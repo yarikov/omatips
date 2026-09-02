@@ -12,9 +12,11 @@ Item {
   readonly property string stateHome: Quickshell.env("XDG_STATE_HOME") || (Quickshell.env("HOME") + "/.local/state")
   readonly property string stateDir: stateHome + "/omarchy/omatips"
   readonly property string statePath: stateDir + "/state.json"
+  readonly property string stateBackupPath: statePath + ".bak"
   readonly property int maxStateBytes: TipModel.MAX_STATE_BYTES
   readonly property string tipsPath: manifest && manifest.__sourceDir ? manifest.__sourceDir + "/tips.json" : ""
   readonly property string stateReadPath: manifest && manifest.__sourceDir ? manifest.__sourceDir + "/state_read.py" : ""
+  readonly property string stateWritePath: manifest && manifest.__sourceDir ? manifest.__sourceDir + "/state_write.py" : ""
 
   property var tips: []
   property var studyState: TipModel.defaultState()
@@ -22,11 +24,11 @@ Item {
   property double notificationSnoozedUntil: 0
   property bool storageReady: false
   property bool tipsReady: false
+  property bool initializationStarted: false
   property bool initialized: false
+  property bool recoveringState: false
+  property bool primaryStateMissing: false
   property bool stateStorageBlocked: false
-  property bool stateWriteInProgress: false
-  property string queuedStateRaw: ""
-  property string writingStateRaw: ""
   property bool actionBusy: false
   property bool removalBusy: false
   property string removalError: ""
@@ -58,41 +60,31 @@ Item {
   readonly property string nextDueLabel: nextDueAt < 0 ? "No reviews scheduled" : TipModel.formatWait(Math.max(0, nextDueAt - nowMs))
 
   function maybeInitialize() {
-    if (initialized || !storageReady || !tipsReady) return
-    initialized = true
+    if (initializationStarted || !storageReady || !tipsReady) return
+    initializationStarted = true
     stateReadProcess.running = true
   }
 
   function persist() {
     if (stateStorageBlocked) return false
-    var serialized = JSON.stringify(studyState, null, 2) + "\n"
+    studyState.storageRevision = Number(studyState.storageRevision || 0) + 1
+    var serialized = JSON.stringify(studyState) + "\n"
     if (!TipModel.stateSizeAllowed(TipModel.utf8ByteLength(serialized))) {
       blockStateStorage("serialized state exceeds the size limit")
       return false
     }
-    queuedStateRaw = serialized
-    beginStateWrite()
+    stateWriteProcess.command = ["/usr/bin/python3", stateWritePath, "commit",
+      statePath, stateBackupPath, String(maxStateBytes),
+      String(studyState.storageRevision), Qt.btoa(serialized)]
+    stateWriteProcess.startDetached()
     return true
-  }
-
-  function beginStateWrite() {
-    if (stateStorageBlocked || stateWriteInProgress || queuedStateRaw === "") return
-    stateWriteInProgress = true
-    writingStateRaw = queuedStateRaw
-    queuedStateRaw = ""
-    stateFile.setText(writingStateRaw)
-  }
-
-  function finishStateWrite() {
-    writingStateRaw = ""
-    stateWriteInProgress = false
-    beginStateWrite()
   }
 
   function applyPrimaryState(raw) {
     nowMs = Date.now()
     studyState = TipModel.parseState(raw, tips, nowMs)
-    var serialized = JSON.stringify(studyState, null, 2) + "\n"
+    initialized = true
+    var serialized = JSON.stringify(studyState) + "\n"
     if (String(raw) !== serialized) persist()
     Qt.callLater(checkQueue)
   }
@@ -100,7 +92,26 @@ Item {
   function startNewCourse() {
     nowMs = Date.now()
     studyState = TipModel.defaultState()
+    initialized = true
     persist()
+    Qt.callLater(checkQueue)
+  }
+
+  function recoverStoredState(primaryMissing) {
+    if (recoveringState) return
+    recoveringState = true
+    primaryStateMissing = primaryMissing === true
+    console.warn("OmaTips: primary state unavailable or invalid; trying backup")
+    stateBackupReadProcess.running = true
+  }
+
+  function applyBackupState(raw) {
+    nowMs = Date.now()
+    studyState = TipModel.parseState(raw, tips, nowMs)
+    initialized = true
+    recoveringState = false
+    persist()
+    console.warn("OmaTips: restored study progress from backup")
     Qt.callLater(checkQueue)
   }
 
@@ -108,6 +119,7 @@ Item {
     if (!initialized || stateStorageBlocked || removalBusy) return false
     nowMs = Date.now()
     var next = TipModel.defaultState()
+    next.storageRevision = Number(studyState.storageRevision || 0)
     next.lastNotificationDate = TipModel.studyDayKey(new Date(nowMs))
     studyState = next
     notificationSnoozedUntil = nowMs + 5 * 60 * 1000
@@ -119,20 +131,24 @@ Item {
   function removePlugin() {
     if (!initialized || removalBusy) return false
     removalBusy = true
+    stateStorageBlocked = true
     removalError = ""
+    var revision = Number(studyState.storageRevision || 0) + 1
+    stateDeleteProcess.command = ["/usr/bin/python3", stateWritePath, "delete",
+      statePath, stateBackupPath, String(maxStateBytes), String(revision)]
     stateDeleteProcess.running = true
     return true
   }
 
   function blockStateStorage(message) {
     stateStorageBlocked = true
-    queuedStateRaw = ""
     console.error("OmaTips: " + message + "; state storage is disabled")
   }
 
   function stateWithNotification(notificationDate) {
     return {
       schemaVersion: studyState.schemaVersion,
+      storageRevision: studyState.storageRevision,
       nextNewIndex: studyState.nextNewIndex,
       cards: studyState.cards,
       lastNotificationDate: notificationDate,
@@ -182,7 +198,7 @@ Item {
   }
 
   function reviewCurrent(rating) {
-    if (!currentTip || stateStorageBlocked) return false
+    if (!initialized || !currentTip || stateStorageBlocked) return false
     nowMs = Date.now()
     var result = TipModel.review(studyState, tips, currentTip.id, rating, nowMs)
     if (!result.reviewed) return false
@@ -246,15 +262,8 @@ Item {
     }
   }
 
-  FileView {
-    id: stateFile
-    path: root.statePath
-    atomicWrites: true
-    preload: false
-    blockAllReads: true
-    printErrors: false
-    onSaved: root.finishStateWrite()
-    onSaveFailed: root.blockStateStorage("could not write state")
+  Process {
+    id: stateWriteProcess
   }
 
   Process {
@@ -266,20 +275,44 @@ Item {
       waitForEnd: true
     }
     onExited: function(exitCode) {
-      if (!root.initialized) return
+      if (!root.initializationStarted || root.initialized) return
       if (exitCode === 10) {
-        console.warn("OmaTips: no stored state; starting a new course")
-        root.startNewCourse()
+        root.recoverStoredState(true)
       } else if (exitCode !== 0) {
-        root.blockStateStorage("state is not a readable regular file")
+        root.recoverStoredState(false)
       } else if (stateReadOutput.data === null || stateReadOutput.data === undefined) {
-        root.blockStateStorage("state produced no readable data")
+        root.recoverStoredState(false)
       } else if (!TipModel.stateSizeAllowed(stateReadOutput.data.byteLength)) {
-        root.blockStateStorage("state exceeds the size limit")
+        root.recoverStoredState(false)
       } else if (TipModel.validStoredState(stateReadOutput.text)) {
         root.applyPrimaryState(stateReadOutput.text)
       } else {
-        root.blockStateStorage("state is invalid")
+        root.recoverStoredState(false)
+      }
+    }
+  }
+
+  Process {
+    id: stateBackupReadProcess
+    command: ["/usr/bin/timeout", "2s", "/usr/bin/python3", root.stateReadPath,
+      root.stateBackupPath, String(root.maxStateBytes)]
+    stdout: StdioCollector {
+      id: stateBackupReadOutput
+      waitForEnd: true
+    }
+    onExited: function(exitCode) {
+      if (!root.recoveringState || root.initialized) return
+      if (exitCode === 0 && stateBackupReadOutput.data !== null
+          && stateBackupReadOutput.data !== undefined
+          && TipModel.stateSizeAllowed(stateBackupReadOutput.data.byteLength)
+          && TipModel.validStoredState(stateBackupReadOutput.text)) {
+        root.applyBackupState(stateBackupReadOutput.text)
+      } else if (root.primaryStateMissing && exitCode === 10) {
+        root.recoveringState = false
+        console.warn("OmaTips: no stored state; starting a new course")
+        root.startNewCourse()
+      } else {
+        root.blockStateStorage("primary state and backup are unavailable or invalid")
       }
     }
   }
@@ -316,7 +349,6 @@ Item {
 
   Process {
     id: stateDeleteProcess
-    command: ["/usr/bin/rm", "-f", "--", root.statePath]
     onExited: function(exitCode) {
       if (exitCode !== 0) {
         root.removalBusy = false
