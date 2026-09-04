@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "yarikov.omatips",
   "name": "OmaTips",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Dmitry Yarikov",
   "license": "MIT",
   "description": "Learn 229 Omarchy hotkey lessons with Anki-style spaced repetition",
