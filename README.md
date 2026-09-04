@@ -12,7 +12,7 @@ XCompose completions.
 Rather than presenting a long cheat sheet, OmaTips introduces shortcuts one at
 a time and brings them back for review until they become muscle memory.
 
-![OmaTips study panel](assets/screenshot.png)
+![OmaTips study panel](preview.png)
 
 ## Install
 
