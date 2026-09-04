@@ -50,7 +50,11 @@ Panel {
   function grade(rating) {
     if (!service || !answerRevealed) return
     preferredRating = rating
-    cursorTarget = rating
+    // Clear the answer before reviewCurrent() changes currentItem. The service
+    // updates its state synchronously, so otherwise the next tip can be
+    // rendered for one frame with the previous tip's answer visible.
+    answerRevealed = false
+    cursorTarget = "showAnswer"
     service.reviewCurrent(rating)
   }
   function ratingIntervalLabel(rating) {
